@@ -1,11 +1,16 @@
 import os
-import shutil
+import shutil, errno
 import glob
 import numpy as np
 import tqdm
 import time
 import re
 
+
+#---------------------------------------------------------------------------------pre run check (cameras) ------------------------------------------------------------
+# Creating a list for the camera names
+cam_names = ["center","gily_center","burrow_top","burrow_side","nest_top","nest_side","nest_other_side"]
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Functions to sort file names correctly
 def atoi(text):
@@ -49,55 +54,28 @@ while True:
     else:
         print("Invalid input, try again")
         
-print("Data transfer to local drive started")
-
-#---------------------------------------------------------------------------------pre run check (number of h5 files per 5 mins) ------------------------------------------------------------
-# no_channels = 11
+print("Data transfer to cloud started")
 no_h5_files = 1
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 # Create a new folder in the destination folder for the experiment
 path_D_name = "D:/big_setup/experiment_{}/".format(experiment_no)
-try:
-    os.makedirs(path_D_name)
-except:
-    pass
+path_Cloud_name = "X:/big_setup/gily_experiments/experiments_{}/".format(experiment_no)
 
-# Creating separate folders for the nidaq and video data
-path_D_vid = "D:/big_setup/experiment_{}/videos/".format(experiment_no)
-path_D_ni = "D:/big_setup/experiment_{}/nidaq_h5/".format(experiment_no)
-path_D_log = "D:/big_setup/experiment_{}/".format(experiment_no)
-
-try:
-    os.makedirs(path_D_vid)
-except:
-    pass
-
-try:
-    os.makedirs(path_D_ni)
-except:
-    pass
-
-# Path to C drive video data
-path_C_vid =  "./v2.0.0-win64/v2.0.0-win64/data/defaultsession/"
-
-# Path to C drive nidaq data
-path_C_ni =  "./data/channel/experiment_{}/".format(experiment_no)
+path_D_vid = 
 
 
-#---------------------------------------------------------------------------------pre run check (cameras) ------------------------------------------------------------
-# Creating a list for the camera names
-cam_names = ["center","gily_center","burrow_top","burrow_side","nest_top","nest_side","nest_other_side"]
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Functions to sort file names correctly
-def atoi(text):
-    return int(text) if text.isdigit() else text
+def copyanything(src, dst):
+    try:
+        shutil.copy(src, dst)
+    except OSError as exc: # python >2.5
+        if exc.errno in (errno.ENOTDIR, errno.EINVAL):
+            shutil.copy(src, dst)
+        else: raise
 
-def natural_keys(text):
-    return [ atoi(c) for c in re.split(r'(\d+)', text) ]
-
-
+print("Copying Data")
+copyanything(path_D_name,path_Cloud_name)
 
 # Moving files continuously from C to D drive 
 
@@ -124,7 +102,7 @@ try:
                 file_name = j.split("\\")[-1]
                 shutil.move(path_C_ni + file_name, path_D_ni + file_name)
         
-        time.sleep(60)
+        time.sleep(10)
 
 
 except KeyboardInterrupt:
