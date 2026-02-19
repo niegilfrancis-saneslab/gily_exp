@@ -60,47 +60,47 @@ no_h5_files = 1
 
 # Create a new folder in the destination folder for the experiment
 path_D_name = "D:/big_setup/experiment_{}/".format(experiment_no)
-path_Cloud_name = "X:/big_setup/gily_experiments/experiments_{}/".format(experiment_no)
+path_cloud_name = "X:/big_setup/gily_experiments/experiments_{}/".format(experiment_no)
 
-path_D_vid = 
+# Creating separate folders for the nidaq and video data
+path_D_vid = "D:/big_setup/experiment_{}/videos/".format(experiment_no)
+path_D_ni = "D:/big_setup/experiment_{}/nidaq_h5/".format(experiment_no)
+path_D_log = "D:/big_setup/experiment_{}/".format(experiment_no)
 
 
+# Creating separate folders for the nidaq and video data
+path_cloud_vid = path_cloud_name+"videos/"
+path_cloud_ni = path_cloud_name+"nidaq_h5/"
+path_cloud_log = path_cloud_name
+os.makedirs(path_cloud_name, exist_ok=True)
+os.makedirs(path_cloud_vid,exist_ok=True)
+os.makedirs(path_cloud_ni, exist_ok=True)
 
-def copyanything(src, dst):
-    try:
-        shutil.copy(src, dst)
-    except OSError as exc: # python >2.5
-        if exc.errno in (errno.ENOTDIR, errno.EINVAL):
-            shutil.copy(src, dst)
-        else: raise
 
-print("Copying Data")
-copyanything(path_D_name,path_Cloud_name)
-
-# Moving files continuously from C to D drive 
+# Moving files continuously from local drive to cloud  
 
 try:
     while True:
         # Getting the videos in the folder and moving the video if it not currently being written to
         for i in cam_names:
-            path_C_cam = path_C_vid+i+"*"
-            all_vids = np.sort(glob.glob(path_C_cam))
+            path_D_cam = path_D_vid+i+"*"
+            all_vids = np.sort(glob.glob(path_D_cam))
             if len(all_vids) > 1:
-                print("Moving Video data")
+                print("Copying Video data")
                 for j in tqdm.tqdm(all_vids[:-1]):
                         file_name = j.split("\\")[-1]
-                        shutil.move(path_C_vid + file_name, path_D_vid + file_name)
+                        shutil.copy(path_D_vid + file_name, path_cloud_vid + file_name)
 
         # Getting all the nidaq files in the folder and moving the files if not currently being written to
-        all_nidaq = glob.glob(path_C_ni+"*.h5")
+        all_nidaq = glob.glob(path_D_ni+"*.h5")
         all_nidaq.sort(key=natural_keys)
 
         if len(all_nidaq) > no_h5_files+1:
             time.sleep(2)
-            print("Moving NIDAQ data")
+            print("Copying NIDAQ data")
             for j in tqdm.tqdm(all_nidaq[:no_h5_files]):
                 file_name = j.split("\\")[-1]
-                shutil.move(path_C_ni + file_name, path_D_ni + file_name)
+                shutil.copy(path_D_ni + file_name, path_cloud_ni + file_name)
         
         time.sleep(10)
 
@@ -108,22 +108,22 @@ try:
 except KeyboardInterrupt:
     print("Moving the rest of the videos")
     for i in cam_names:
-        path_C_cam = path_C_vid+i+"*"
-        all_vids = np.sort(glob.glob(path_C_cam))
+        path_D_cam = path_D_vid+i+"*"
+        all_vids = np.sort(glob.glob(path_D_cam))
         for j in tqdm.tqdm(all_vids):
                 file_name = j.split("\\")[-1]
-                shutil.move(path_C_vid + file_name, path_D_vid + file_name)
+                shutil.copy(path_D_vid + file_name, path_cloud_vid + file_name)
 
     print("Moving the rest of the nidaq data")
-    all_nidaq = glob.glob(path_C_ni+"*.h5")
+    all_nidaq = glob.glob(path_D_ni+"*.h5")
     for j in tqdm.tqdm(all_nidaq):
         file_name = j.split("\\")[-1]
-        shutil.move(path_C_ni + file_name, path_D_ni + file_name)
+        shutil.copy(path_D_ni + file_name, path_cloud_ni + file_name)
 
 
     # Checking for log files
     print("Moving log files if any ")
-    all_log = glob.glob(path_C_ni+"*.txt")
+    all_log = glob.glob(path_D_log+"*.txt")
     for j in tqdm.tqdm(all_log):
         file_name = j.split("\\")[-1]
-        shutil.move(path_C_ni + file_name, path_D_log + file_name)
+        shutil.copy(path_D_log + file_name, path_cloud_log + file_name)
