@@ -3,6 +3,7 @@ from scipy.io import wavfile
 import numpy as np
 import os
 from multiprocessing import Process, Value, Queue
+from multiprocessing import shared_memory
 import ctypes as ct
 import time
 from nidaqmx.constants import Level, Signal
@@ -53,16 +54,16 @@ channels = ["PXI1Slot2/ai0", # nest - mic 4
             "PXI1Slot2/ai1", # burrow - mic 5
             "PXI1Slot2/ai2","PXI1Slot2/ai3", #  Ralph Rig - mic 6 and 7 
             "PXI1Slot2/ai4","PXI1Slot2/ai5", #  Gily Rig - mic 8 and 9 
-            "PXI1Slot2/ai6",   #  mic 10 - lowered mics 
+            # "PXI1Slot2/ai6",   #  mic 10 - lowered mics 
             "PXI1Slot2/ai7", # mic 11
-            "PXI1Slot3/ai0",  # mic 12
-            "PXI1Slot3/ai1",  # mic 13
-            "PXI1Slot3/ai2", # mic 14
-            "PXI1Slot3/ai3", # mic 15
+            # "PXI1Slot3/ai0",  # mic 12
+            # "PXI1Slot3/ai1",  # mic 13
+            # "PXI1Slot3/ai2", # mic 14
+            # "PXI1Slot3/ai3", # mic 15
             "PXI1Slot3/ai4", # mic 16
-            "PXI1Slot3/ai5",  # mic 17
+            # "PXI1Slot3/ai5",  # mic 17
             "PXI1Slot3/ai6", # mic 18
-            "PXI1Slot3/ai7", # mic 19 - last lowered mic 
+            # "PXI1Slot3/ai7", # mic 19 - last lowered mic 
             "PXI1Slot4/ai3", # headmounted Mic 1 Transceiver A
             "PXI1Slot4/ai4", # headmounted Mic 2 Transceiver B
             "PXI1Slot4/ai5", # Robot TTL 
@@ -78,7 +79,7 @@ channels = ["PXI1Slot2/ai0", # nest - mic 4
 # Variables to store data in chunks for the read buffer
 num_samples = sampling_rate * duration_store_buffer
 
-chunk_size = 12500 # num_samples needs to be a multiple of chunk_size
+chunk_size = 25000 # num_samples needs to be a multiple of chunk_size
 num_chunks = int(num_samples / chunk_size)
 
 
@@ -97,7 +98,7 @@ spec_white_color = np.array([255, 255, 255]).reshape((1, 1, 3)),  # BGR order
 spec_black_color = np.array([0, 0, 0]).reshape((1, 1, 3)),  # BGR order
 spec_mic_diff_thresh = 450e-11
 n_channels = len(channels)-1
-spec_buffer_len = 25 # number of chunks - 25*12500 is 2.5 sec worth
+spec_buffer_len = 10 # number of chunks - 10*25000 is 2 sec worth
 mic_deque_1 = deque(maxlen=spec_buffer_len) # 2.5 seconds worth
 mic_deque_2 = deque(maxlen=spec_buffer_len) # 2.5 seconds worth
 mic_deque_3 = deque(maxlen=spec_buffer_len) # 2.5 seconds worth
@@ -215,8 +216,13 @@ def logging(flag_end, log_path, experiment_no):
         print(e)
     
 
-def spec_plot(read_buffer,flag_end):
+def spec_plot(shm_name, read_index, flag_end):
     print("Spectrogram Plot Started")
+
+    existing_shm = shared_memory.SharedMemory(name=shm_name)
+    shared_array = np.ndarray((len(channels), chunk_size), dtype=np.float32, buffer=existing_shm.buf)
+
+    last_seen = -1
 
     start = time.time()
     last_printed = 0
@@ -236,7 +242,13 @@ def spec_plot(read_buffer,flag_end):
                     last_printed = elapsed
                 
 
-                final_arr = np.array(read_buffer.get(),dtype=np.float16) # converting the datatype to a numpy array
+                #final_arr = np.array(read_buffer.get(),dtype=np.float16) # converting the datatype to a numpy array
+                if read_index.value == last_seen:
+                    continue
+
+                final_arr = shared_array.copy()  # single fast memcpy
+                last_seen = read_index.value
+
                 #-----------------------------------------------------------------pre run check (spectrogram plotting) -------------------------------------------------------------------------
                 color_frame_1,color_frame_2,color_frame_3,color_frame_4  = calc_spec_frame_segment_mono(final_arr)
                     
@@ -263,7 +275,7 @@ def spec_plot(read_buffer,flag_end):
                     timer_string,
                     (50, 50),
                     cv2.FONT_HERSHEY_SIMPLEX,
-                    1,
+                    0.8,
                     text_color,
                     2)
                 cv2.imshow('Ralph Rig Spectrogram', complete_image_1)
@@ -284,8 +296,10 @@ def spec_plot(read_buffer,flag_end):
     print("Exited out of Spectrogram plotting")
     
 
-def read_NIDAQ(read_buffer,flag_end,path_name):
+def read_NIDAQ(shm_name, read_index, flag_end, path_name):
     print("Recording Started")
+    existing_shm = shared_memory.SharedMemory(name=shm_name)
+    shared_array = np.ndarray((len(channels), chunk_size), dtype=np.float32, buffer=existing_shm.buf)
 
     h5_file_idx = 0 
     h5_chunk_idx = 0
@@ -301,7 +315,7 @@ def read_NIDAQ(read_buffer,flag_end,path_name):
         'ai_channels', 
         shape=(len(channels),num_samples),
         chunks=(len(channels),chunk_size), 
-        dtype=np.float16,)
+        dtype=np.float32,)
     
 
     # Data is continually read from the NIDAQ until keyboard interrupt is pressed
@@ -325,7 +339,9 @@ def read_NIDAQ(read_buffer,flag_end,path_name):
                 last_written_idx = copy.deepcopy(h5_chunk_idx)
 
 
-                read_buffer.put(chunks)
+                #read_buffer.put(chunks)
+                shared_array[:] = chunks
+                read_index.value += 1
 
                 # Resetting the index if the last sample is reached (it's a circular buffer)
                 if (h5_chunk_idx+1)*chunk_size == num_samples:
@@ -345,7 +361,7 @@ def read_NIDAQ(read_buffer,flag_end,path_name):
                         'ai_channels', 
                         shape=(len(channels),num_samples),
                         chunks=(len(channels),chunk_size), 
-                        dtype=np.float16,)
+                        dtype=np.float32,)
 
                 else:
                     # updating the read index
@@ -475,16 +491,26 @@ if __name__ == '__main__':
     log_path = os.path.join(path_name,log_name)
 
 
-    read_buffer = Queue(50) # Creating a shared "read buffer" to store the data read from the NIDAQ 
+    #read_buffer = Queue(50) # Creating a shared "read buffer" to store the data read from the NIDAQ 
+    buffer_shape = (len(channels), chunk_size)
+    buffer_dtype = np.float32  # use float32 (faster + enough precision)
+    size = int(np.prod(buffer_shape) * np.dtype(buffer_dtype).itemsize)
+
+    shm = shared_memory.SharedMemory(create=True, size=size)
+
+    #shm = shared_memory.SharedMemory(create=True, size=np.prod(buffer_shape) * np.dtype(buffer_dtype).itemsize)
+    shared_array = np.ndarray(buffer_shape, dtype=buffer_dtype, buffer=shm.buf)
 
 
     flag_end = Value('i', 0) # Shared memory flag to indicate when recording stops
-    # read_idx = Value('i', 0) # Shared memory read index to indicate which index value is being written
+    read_idx = Value('i', 0) # Shared memory read index to indicate which index value is being written
 
 
 
-    p1 = Process(target=read_NIDAQ, args = (read_buffer,flag_end,path_name,))
-    p2 = Process(target=spec_plot, args = (read_buffer,flag_end,))
+    #p1 = Process(target=read_NIDAQ, args = (read_buffer,flag_end,path_name,))
+    #p2 = Process(target=spec_plot, args = (read_buffer,flag_end,))
+    p1 = Process(target=read_NIDAQ, args=(shm.name, read_idx, flag_end, path_name,))
+    p2 = Process(target=spec_plot, args=(shm.name, read_idx, flag_end,))
     p3 = Process(target=logging, args = (flag_end,log_path,experiment_no))
     p4 = Process(target=gen_clock, args = (flag_end,))
     # p5 = Process(target=digital_in_slot_2, args = (read_buffer,flag_end,read_idx,flag_reset,))
@@ -496,7 +522,8 @@ if __name__ == '__main__':
     p2.join()
     p3.join()
     p4.join()
-    
+    shm.close()
+    shm.unlink()
    
 
     

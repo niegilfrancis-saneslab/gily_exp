@@ -20,8 +20,8 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 # Path to the nidaq data for a particular experiment
-experiment_no = 344
-clk_channel = 18
+experiment_no = 547
+clk_channel = 13
 crop_len = 1 # length (in seconds) of audio and video to cut off from the end
 camera_fps = 30
 camera_expected_no_frames = 9000-1
