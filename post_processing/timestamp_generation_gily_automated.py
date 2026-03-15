@@ -20,7 +20,8 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 # Path to the nidaq data for a particular experiment
-experiment_no = 344
+exps = [491,492]
+for experiment_no in exps:
 clk_channel = 18
 crop_len = 1 # length (in seconds) of audio and video to cut off from the end
 camera_fps = 30
@@ -95,28 +96,53 @@ for i in indices_r:
 
 indices_r = temp_r_0
 
-# Getting the moving average of the first and last clock channel
+
+print("Automatically detecting start and stop record positions")
+
+start_record_file_no = None
+stop_record_file_no = None
+indices_start = []
+indices_stop = []
 MA = []
 
-# Setting the file number for which we expect to see the start and stop record
-start_record_file_no = 0 # 0 indicates the first saved clock channel
-stop_record_file_no = -1 # -1 indicates the last saved clock channel
+for file_idx, name in enumerate(tqdm.tqdm(clock_chs_names)):
 
-start_record_file_no = int(input("Enter the saved clock channel index where the start record can be found (file name format: acquisition_data_(index)_(channel).wav ):  "))
-stop_record_file_no = int(input("Enter the saved clock channel index where the stop record can be found (file name format: acquisition_data_(index)_(channel).wav ):  "))
+    sampling_rate, clk_ch = wavfile.read(name)
 
-if start_record_file_no<-len(clock_chs_names)+1 or start_record_file_no> len(clock_chs_names)-1:
-    start_record_file_no = 0
-    print("Error in start record index input")
+    averaging_window_samples = int((1/camera_sampling_rate) * sampling_rate)
+
+    df_clock = pd.Series(clk_ch)
+    ma = df_clock.rolling(averaging_window_samples).mean().fillna(0)
+
+    MA.append(ma)
+
+    rising_edges = indices_r[file_idx]
+
+    # Detect start
+    for idx1, idx2 in zip(rising_edges[:-1], rising_edges[1:]):
+
+        diff = ma[idx2] - ma[idx1]
+
+        if diff < threshold_ma_start:
+            if start_record_file_no is None:
+                start_record_file_no = file_idx
+                indices_start = [idx2]
+
+        if diff > threshold_ma_stop:
+            stop_record_file_no = file_idx
+            indices_stop.append(idx1)
+
+print(f"Start record detected in file index: {start_record_file_no}")
+print(f"Stop record detected in file index: {stop_record_file_no}")
 
 if stop_record_file_no<-len(clock_chs_names)+1 or stop_record_file_no> len(clock_chs_names)-1:
     stop_record_file_no = -1
-    print("Error in stop record index input")
+    print("Error in stop record index")
 
 if stop_record_file_no < start_record_file_no:
     stop_record_file_no = -1
     start_record_file_no = 0
-    print("Error in either stop record or start record index input")
+    print("Error in either stop record or start record index")
 
 
 print("Getting the moving average of the first and last clock signal")
@@ -137,7 +163,7 @@ for name in tqdm.tqdm([clock_chs_names[start_record_file_no],clock_chs_names[sto
 # Using the moving average and rising/falling edges to detect start and stop
 
 threshold_ma_start = -1 # To detect start of recording (threshold on the moving average)
-threshold_ma_stop = 0.25 # change to 1 if it's too sensitive a threshold
+threshold_ma_stop = 1 # change to 1 if it's too sensitive a threshold
 
 
 
@@ -195,12 +221,28 @@ if len(indices_stop) == 0:
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 # Plotting to see the start and stop record indices
-
 sorted_indices_start = np.sort(indices_start)
 sorted_indices_stop = np.sort(indices_stop)
 
 print("The indices are:",sorted_indices_start)
 print("The indices are:",sorted_indices_stop)
+
+
+################# go to the next experiment if lens are 0#################################
+if len(sorted_indices_start) == 0:
+    print("No start record detected")
+
+if len(sorted_indices_stop) == 0:
+    print("No stop record detected")
+
+
+
+
+start_record = sorted_indices_start[0]
+stop_record = sorted_indices_stop[-1]
+
+print(f"Start record sample index: {start_record}")
+print(f"Stop record sample index: {stop_record}")
 
 
 
@@ -267,20 +309,9 @@ fig.legend()
 fig.tight_layout()
 plt.show()
 
-# Finalizing the start and stop record indices
-if len(sorted_indices_start) > 1:
-    idx_entry = input("Enter which index number is start record (starts from index 0, 1 and so on)\n")
-    print(f"You have entered {int(idx_entry)} corresponding to {sorted_indices_start[int(idx_entry)]}")
-    start_record = sorted_indices_start[int(idx_entry)]
-else:
-    start_record = sorted_indices_start[0]
 
-if len(sorted_indices_stop) > 1:
-    idx_entry = input("Enter which index number is stop record (starts from index 0, 1 and so on)\n")
-    print(f"You have entered {int(idx_entry)} corresponding to {sorted_indices_stop[int(idx_entry)]}")
-    stop_record = sorted_indices_stop[int(idx_entry)]
-else:
-    stop_record = sorted_indices_stop[0]
+
+
 
 
 
