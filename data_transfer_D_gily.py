@@ -20,9 +20,7 @@ exp_numbers = [i.split("\\")[1].split('_')[1] for i in folders]
 exp_numbers.sort(key=natural_keys)
 last_exp_no_in_C_drive = int(exp_numbers[-1])
 
-# checking to see what experiments are written
-folders = glob.glob("D:/big_setup/*")
-folders = [i for i in folders if 'experiment_' in i]
+# checking to see what experiments are writteny
 exp_numbers = [i.split("\\")[1].split('_')[1] for i in folders]
 exp_numbers.sort(key=natural_keys)
 last_exp_no_in_D_drive = int(exp_numbers[-1])
