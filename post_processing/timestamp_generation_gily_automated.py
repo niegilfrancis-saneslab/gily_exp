@@ -11,6 +11,7 @@ import cv2
 from collections import defaultdict
 from imutils.video import count_frames
 from itertools import chain
+import h5py 
 
 # Functions to sort file names correctly
 def atoi(text):
@@ -20,416 +21,464 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 # Path to the nidaq data for a particular experiment
-exps = [491,492]
+exps = [492]
 for experiment_no in exps:
-clk_channel = 18
-crop_len = 1 # length (in seconds) of audio and video to cut off from the end
-camera_fps = 30
-camera_expected_no_frames = 9000-1
-# camera_corrected_sample_time = 0.03338542
-sampling_rate = 125000
-path_nidaq = "D:/big_setup/experiment_{}/nidaq/".format(experiment_no)
+    print(f"Running experiment: {experiment_no}")
+
+    # extracting the h5 files 
+    file_path = f"D:/big_setup/experiment_{experiment_no}/"
+    h5_files = glob.glob(file_path+"nidaq_h5/*.h5")
+    os.makedirs(file_path+"nidaq/",exist_ok=True)
+
+    if len(glob.glob(file_path+f"nidaq/acquisition_data_*_*.wav")) == 0:
+        print("Exporting the h5 files to wav files")
+
+        for index,file in tqdm.tqdm(enumerate(h5_files)):
+            h5 = h5py.File(file, "r")
+            for channel in range(h5['ai_channels'].shape[-2]):
+                data = np.array(h5['ai_channels'][channel,:], dtype=np.float32)
+                wavfile.write(file_path+f"nidaq/acquisition_data_{index}_{channel}.wav", 125000, data)
+
+            h5.close()
+
+    
+    crop_len = 1 # length (in seconds) of audio and video to cut off from the end
+    camera_fps = 30
+    camera_expected_no_frames = 9000-1
+    # camera_corrected_sample_time = 0.03338542
+    sampling_rate = 125000
+    path_nidaq = "D:/big_setup/experiment_{}/nidaq/".format(experiment_no)
 
 
-# Path to the video data for a particular experiment
-path_video = "D:/big_setup/experiment_{}/videos/".format(experiment_no)
+    # Path to the video data for a particular experiment
+    path_video = "D:/big_setup/experiment_{}/videos/".format(experiment_no)
 
 
-# Deleting the trunc files if it is already present
-trunc_files = glob.glob(path_nidaq+"*_trunc*.*")
-for i in trunc_files:
-    os.remove(i) 
+    # Deleting the trunc files if it is already present
+    trunc_files = glob.glob(path_nidaq+"*_trunc*.*")
+    for i in trunc_files:
+        os.remove(i) 
 
-trunc_files = glob.glob(path_video+"*_trunc*.*")
-for i in trunc_files:
-    os.remove(i) 
+    trunc_files = glob.glob(path_video+"*_trunc*.*")
+    for i in trunc_files:
+        os.remove(i) 
 
-# Get all clock channels for the experiment
-clock_chs_names = glob.glob(path_nidaq + f"acquisition_data_*_{clk_channel}.wav")
-clock_chs_names.sort(key=natural_keys)
+    # Automatically detect the last channel index (clock channel)
+    all_nidaq_files = glob.glob(path_nidaq + "acquisition_data_*_*.wav")
 
-# Getting all the rising and falling edges in the clock channels
-threshold_rf = 1 # To detect all rising and falling edges
+    channels = []
+    for f in all_nidaq_files:
+        ch = int(re.findall(r'acquisition_data_\d+_(\d+)\.wav', os.path.basename(f))[0])
+        channels.append(ch)
 
-# Storing the indices of the rising and falling edges in a list
-indices_r = []
-indices_f = []
+    clk_channel = max(channels)
 
-# To store the length of each clock channel
-length_clks = [] 
-
-print("Getting the rising and falling edges in the clock signal")
-for name in tqdm.tqdm(clock_chs_names):
-    temp_r = []
-    temp_f = []
-
-    # Loading the file
-    sampling_rate,clk_ch = wavfile.read(name)
-
-    diff = clk_ch[1:]-clk_ch[0:-1]
-    temp_r = np.where(diff>threshold_rf)[0]
-    temp_f = np.where(diff<-threshold_rf)[0]
-    length_clks.append(len(clk_ch))
-    indices_r.append(temp_r)
-    indices_f.append(temp_f)
-
-print("Clock channel lengths")
-print(length_clks)
+    print(f"Automatically detected clock channel: {clk_channel}")
 
 
-# Removing multiple detections of the same rising edge
-camera_sampling_rate = 30 #FPS - frames per second. This is used to estimate when the next rising edge is to be detected
-# window_samples = int((1/camera_sampling_rate)*sampling_rate) # Number of samples present in the window
-window_samples = 3000
 
-temp_r_0 = []
-for i in indices_r:
-    prev_sample = i[0]
-    temp_r_1 = []
-    temp_r_1.append(i[0])
-    for j in i[1:]:
-        if not(abs(j - prev_sample) < window_samples ):
-            temp_r_1.append(j)
-        prev_sample = j
-    temp_r_0.append(temp_r_1)
+    # Get all clock channels for the experiment
+    clock_chs_names = glob.glob(path_nidaq + f"acquisition_data_*_{clk_channel}.wav")
+    clock_chs_names.sort(key=natural_keys)
+
+    experiment_len = len(clock_chs_names)
+
+    # Getting all the rising and falling edges in the clock channels
+    threshold_rf = 1 # To detect all rising and falling edges
+
+    # Storing the indices of the rising and falling edges in a list
+    indices_r = []
+    indices_f = []
+
+    # To store the length of each clock channel
+    length_clks = [] 
+
+    print("Getting the rising and falling edges in the clock signal")
+    for name in tqdm.tqdm(clock_chs_names):
+        temp_r = []
+        temp_f = []
+
+        # Loading the file
+        sampling_rate,clk_ch = wavfile.read(name)
+
+        diff = clk_ch[1:]-clk_ch[0:-1]
+        temp_r = np.where(diff>threshold_rf)[0]
+        temp_f = np.where(diff<-threshold_rf)[0]
+        length_clks.append(len(clk_ch))
+        indices_r.append(temp_r)
+        indices_f.append(temp_f)
+
+    print("Clock channel lengths")
+    print(length_clks)
 
 
-indices_r = temp_r_0
+    # Removing multiple detections of the same rising edge
+    camera_sampling_rate = 30 #FPS - frames per second. This is used to estimate when the next rising edge is to be detected
+    # window_samples = int((1/camera_sampling_rate)*sampling_rate) # Number of samples present in the window
+    window_samples = 3000
+
+    temp_r_0 = []
+    for i in indices_r:
+        prev_sample = i[0]
+        temp_r_1 = []
+        temp_r_1.append(i[0])
+        for j in i[1:]:
+            if not(abs(j - prev_sample) < window_samples ):
+                temp_r_1.append(j)
+            prev_sample = j
+        temp_r_0.append(temp_r_1)
 
 
-print("Automatically detecting start and stop record positions")
+    indices_r = temp_r_0
 
-start_record_file_no = None
-stop_record_file_no = None
-indices_start = []
-indices_stop = []
-MA = []
 
-for file_idx, name in enumerate(tqdm.tqdm(clock_chs_names)):
+    print("Automatically detecting start and stop record positions")
+    # This 
+    threshold_ma_start = -1.6 # To detect start of recording (threshold on the moving average)
+    threshold_ma_stop = 1 # change to 1.6 if it's too sensitive a threshold
 
-    sampling_rate, clk_ch = wavfile.read(name)
+    start_record_file_no = None
+    stop_record_file_no = None
+    indices_start = []
+    indices_stop = []
+    MA = []
 
-    averaging_window_samples = int((1/camera_sampling_rate) * sampling_rate)
+    for file_idx, name in enumerate(tqdm.tqdm(clock_chs_names)):
 
-    df_clock = pd.Series(clk_ch)
-    ma = df_clock.rolling(averaging_window_samples).mean().fillna(0)
+        sampling_rate, clk_ch = wavfile.read(name)
 
-    MA.append(ma)
+        averaging_window_samples = int((1/camera_sampling_rate) * sampling_rate)
 
-    rising_edges = indices_r[file_idx]
+        df_clock = pd.Series(clk_ch)
+        ma = df_clock.rolling(averaging_window_samples).mean().fillna(0)
 
-    # Detect start
-    for idx1, idx2 in zip(rising_edges[:-1], rising_edges[1:]):
+        MA.append(ma)
 
-        diff = ma[idx2] - ma[idx1]
+        rising_edges = indices_r[file_idx]
 
+
+        # Detect start
+        for idx in rising_edges:
+            
+            val = ma[idx]
+            if val < threshold_ma_start:
+                if start_record_file_no is None:
+                    start_record_file_no = file_idx
+            
+            if val > threshold_ma_stop:
+                if start_record_file_no is not None:
+                    stop_record_file_no = file_idx
+
+
+    print(f"Start record detected in file index: {start_record_file_no}")
+    print(f"Stop record detected in file index: {stop_record_file_no}")
+
+    if (start_record_file_no is None):
+        print(f"Skipping experiment {experiment_no}")
+        continue
+
+
+    if stop_record_file_no is None:
+        stop_record_file_no = experiment_len-1
+        print("Error in stop record index, defaulting to the file last index")
+    elif stop_record_file_no < start_record_file_no:
+            stop_record_file_no = experiment_len-1
+            start_record_file_no = 0
+            print("Error in either stop record or start record index, defaulting to the first and last file")
+
+
+    print("Getting the moving average of the first and last clock signal")
+    for name in tqdm.tqdm([clock_chs_names[start_record_file_no],clock_chs_names[stop_record_file_no]]):
+
+        # Loading the file
+        sampling_rate,clk_ch = wavfile.read(name)
+
+        camera_sampling_rate = 30 #FPS - frames per second. This is used to estimate the window for the moving average
+        averaging_window_samples = int((1/camera_sampling_rate)*sampling_rate) # Number of samples present in the window
+
+        # Converting the numpy array to a series for faster processing
+        df_clock = pd.Series(clk_ch) 
+
+        # Getting the moving average 
+        temp_MA = df_clock.rolling(averaging_window_samples).mean()
+        MA.append(temp_MA.fillna(0))
+    # Using the moving average and rising/falling edges to detect start and stop
+
+
+
+
+
+    # Getting the indices of the start and stop record
+    print("Getting the index for start record")
+    indices_start = []
+    for idx1,idx2 in tqdm.tqdm(zip(indices_r[start_record_file_no][:-1],indices_r[start_record_file_no][1:])):
+        diff = MA[0][idx2]-MA[0][idx1]
         if diff < threshold_ma_start:
-            if start_record_file_no is None:
-                start_record_file_no = file_idx
-                indices_start = [idx2]
+            indices_start.append(idx2)
 
+    # **************************************************hard coding a the start record index if there is an issue*****************************************************
+    # indices_start = [] 
+    # indices_start.append(8020601) 
+    # ***********************************************************************************************************************************************
+
+    if len(indices_start) == 0:
+        print("No start index found, defaulting to the first rising edge in the file")
+        indices_start.append(indices_r[start_record_file_no][0])
+
+
+
+    #---------------------------------------------------manual start position input-----------------------------------------------------------------------------
+    # target = input("Enter the start second: ")
+    # def closest_value(lst, target):
+    #     return min(lst, key=lambda x: abs(x - target))
+    # indices_start = [closest_value(indices_r[start_record_file_no], float(target)*192000)]
+    # print("The reworked start indices are:",indices_start)
+    #---------------------------------------------------------------------------------------------------------------------------------------
+
+
+    print("Getting the index for stop record")
+    indices_stop = []
+    for idx1,idx2 in tqdm.tqdm(zip(indices_r[stop_record_file_no][:-1],indices_r[stop_record_file_no][1:])):
+        diff = MA[1][idx2]-MA[1][idx1]
         if diff > threshold_ma_stop:
-            stop_record_file_no = file_idx
             indices_stop.append(idx1)
 
-print(f"Start record detected in file index: {start_record_file_no}")
-print(f"Stop record detected in file index: {stop_record_file_no}")
+    # **************************************************hard coding the stop record index if there is an issue*****************************************************
+    #indices_stop = [] 
+    #indices_stop.append(904657) 
+    # ***********************************************************************************************************************************************
 
-if stop_record_file_no<-len(clock_chs_names)+1 or stop_record_file_no> len(clock_chs_names)-1:
-    stop_record_file_no = -1
-    print("Error in stop record index")
+    if len(indices_stop) == 0:
+        print("No stop index found, defaulting to the last rising edge in the file")
+        indices_stop.append(indices_r[stop_record_file_no][-1])
 
-if stop_record_file_no < start_record_file_no:
-    stop_record_file_no = -1
-    start_record_file_no = 0
-    print("Error in either stop record or start record index")
 
+    #---------------------------------------------------manual stop position input-----------------------------------------------------------------------------
+    # target = input("Enter the stop second: ")
+    # def closest_value(lst, target):
+    #     return min(lst, key=lambda x: abs(x - target))
+    # indices_stop = [closest_value(indices_r[stop_record_file_no], float(target)*192000)]
+    # print("The reworked stop indices are:",indices_stop)
+    #---------------------------------------------------------------------------------------------------------------------------------------
 
-print("Getting the moving average of the first and last clock signal")
-for name in tqdm.tqdm([clock_chs_names[start_record_file_no],clock_chs_names[stop_record_file_no]]):
+    # Plotting to see the start and stop record indices
+    sorted_indices_start = np.sort(indices_start)
+    sorted_indices_stop = np.sort(indices_stop)
 
-    # Loading the file
-    sampling_rate,clk_ch = wavfile.read(name)
+    print("The indices are:",sorted_indices_start)
+    print("The indices are:",sorted_indices_stop)
 
-    camera_sampling_rate = 30 #FPS - frames per second. This is used to estimate the window for the moving average
-    averaging_window_samples = int((1/camera_sampling_rate)*sampling_rate) # Number of samples present in the window
 
-    # Converting the numpy array to a series for faster processing
-    df_clock = pd.Series(clk_ch) 
+    ################# go to the next experiment if lens are 0#################################
+    if len(sorted_indices_start) == 0:
+        print("No start record detected")
+        print(f"Skipping experiment {experiment_no}")
+        continue
 
-    # Getting the moving average 
-    temp_MA = df_clock.rolling(averaging_window_samples).mean()
-    MA.append(temp_MA.fillna(0))
-# Using the moving average and rising/falling edges to detect start and stop
+    if len(sorted_indices_stop) == 0:
+        print("No stop record detected")
+        print(f"Skipping experiment {experiment_no}")
+        continue
 
-threshold_ma_start = -1 # To detect start of recording (threshold on the moving average)
-threshold_ma_stop = 1 # change to 1 if it's too sensitive a threshold
 
 
 
-# Getting the indices of the start and stop record
-print("Getting the index for start record")
-indices_start = []
-for idx1,idx2 in tqdm.tqdm(zip(indices_r[start_record_file_no][:-1],indices_r[start_record_file_no][1:])):
-    diff = MA[0][idx2]-MA[0][idx1]
-    if diff < threshold_ma_start:
-        indices_start.append(idx2)
+    start_record = sorted_indices_start[0]
+    stop_record = sorted_indices_stop[0]
 
-# **************************************************hard coding a the start record index if there is an issue*****************************************************
-# indices_start = [] 
-# indices_start.append(8020601) 
-# ***********************************************************************************************************************************************
+    print(f"Start record sample index: {start_record}")
+    print(f"Stop record sample index: {stop_record}")
 
-if len(indices_start) == 0:
-    print("No start index found, defaulting to the first rising edge in the file")
-    indices_start.append(indices_r[start_record_file_no][0])
 
 
+    # getting the indices to plot for the start record clock channel
+    first_sample_0 = sorted_indices_start[0] - int(sampling_rate/2)
+    last_sample_0 = sorted_indices_start[-1] + int(sampling_rate/2)
 
-#---------------------------------------------------manual start position input-----------------------------------------------------------------------------
-# target = input("Enter the start second: ")
-# def closest_value(lst, target):
-#     return min(lst, key=lambda x: abs(x - target))
-# indices_start = [closest_value(indices_r[start_record_file_no], float(target)*192000)]
-# print("The reworked start indices are:",indices_start)
-#---------------------------------------------------------------------------------------------------------------------------------------
 
+    # getting the indices to plot for the stop record clock channel
+    first_sample_1 = sorted_indices_stop[0] - int(sampling_rate/2)
+    last_sample_1 = sorted_indices_stop[-1] + int(sampling_rate/2)
 
-print("Getting the index for stop record")
-indices_stop = []
-for idx1,idx2 in tqdm.tqdm(zip(indices_r[stop_record_file_no][:-1],indices_r[stop_record_file_no][1:])):
-    diff = MA[1][idx2]-MA[1][idx1]
-    if diff > threshold_ma_stop:
-        indices_stop.append(idx1)
 
-# **************************************************hard coding the stop record index if there is an issue*****************************************************
-#indices_stop = [] 
-#indices_stop.append(904657) 
-# ***********************************************************************************************************************************************
+    # Loading the files
+    sampling_rate,start_clk_ch = wavfile.read(clock_chs_names[start_record_file_no])
+    sampling_rate, stop_clk_ch = wavfile.read(clock_chs_names[stop_record_file_no])
 
-if len(indices_stop) == 0:
-    print("No stop index found, defaulting to the last rising edge in the file")
-    indices_stop.append(indices_r[stop_record_file_no][-1])
 
+    time_axis_0 = np.array(range(len(start_clk_ch)))/sampling_rate
+    time_axis_1 = np.array(range(len(stop_clk_ch)))/sampling_rate
 
-#---------------------------------------------------manual stop position input-----------------------------------------------------------------------------
-# target = input("Enter the stop second: ")
-# def closest_value(lst, target):
-#     return min(lst, key=lambda x: abs(x - target))
-# indices_stop = [closest_value(indices_r[stop_record_file_no], float(target)*192000)]
-# print("The reworked stop indices are:",indices_stop)
-#---------------------------------------------------------------------------------------------------------------------------------------
 
-# Plotting to see the start and stop record indices
-sorted_indices_start = np.sort(indices_start)
-sorted_indices_stop = np.sort(indices_stop)
+    # Getting the first and last index to find the range to plot
+    # Plotting the clock channel data with the moving average and the rising edge/start record detection
+    fig = plt.figure(figsize=(15,5))
+    plt.subplot(211)
 
-print("The indices are:",sorted_indices_start)
-print("The indices are:",sorted_indices_stop)
+    plt.plot(time_axis_0[first_sample_0:last_sample_0],start_clk_ch[first_sample_0:last_sample_0],label = "Clock+AUX")
+    plt.plot(time_axis_0[first_sample_0:last_sample_0],MA[0][first_sample_0:last_sample_0],'r', label = "Moving Average")
 
 
-################# go to the next experiment if lens are 0#################################
-if len(sorted_indices_start) == 0:
-    print("No start record detected")
 
-if len(sorted_indices_stop) == 0:
-    print("No stop record detected")
+    # Converting the rising  edges list to an array 
+    #rising_0 = np.array(indices_r[start_record_file_no])
+    # Uncomment below line to show all the rising edges
+    #plt.vlines(time_axis_0[rising_0[(rising_0<=last_sample_0) & (rising_0>=first_sample_0)]],0,5,'g')
 
 
+    # # Uncomment below line to show start record point
+    plt.vlines(time_axis_0[sorted_indices_start[0]],0,5,'y', label = f"Start Record Point for file: {clock_chs_names[start_record_file_no]}")
 
+    plt.xlabel("Time (s)")
+    plt.ylabel("Signal Amplitude (V)")
 
-start_record = sorted_indices_start[0]
-stop_record = sorted_indices_stop[-1]
 
-print(f"Start record sample index: {start_record}")
-print(f"Stop record sample index: {stop_record}")
 
 
+    plt.subplot(212)
+    plt.plot(time_axis_1[first_sample_1:last_sample_1],stop_clk_ch[first_sample_1:last_sample_1])
+    plt.plot(time_axis_1[first_sample_1:last_sample_1],MA[1][first_sample_1:last_sample_1],'r')
 
-# getting the indices to plot for the start record clock channel
-first_sample_0 = sorted_indices_start[0] - int(sampling_rate/2)
-last_sample_0 = sorted_indices_start[-1] + int(sampling_rate/2)
+    # Converting the rising  edges list to an array 
+    rising_1 = np.array(indices_r[stop_record_file_no])
+    # Uncomment below line to show all the rising edges
+    #plt.vlines(time_axis_1[rising_1[(rising_1<=last_sample_1) & (rising_1>=first_sample_1)]],0,5,'g')
 
 
-# getting the indices to plot for the stop record clock channel
-first_sample_1 = sorted_indices_stop[0] - int(sampling_rate/2)
-last_sample_1 = sorted_indices_stop[-1] + int(sampling_rate/2)
-
-
-# Loading the files
-sampling_rate,start_clk_ch = wavfile.read(clock_chs_names[start_record_file_no])
-sampling_rate, stop_clk_ch = wavfile.read(clock_chs_names[stop_record_file_no])
-
-
-time_axis_0 = np.array(range(len(start_clk_ch)))/sampling_rate
-time_axis_1 = np.array(range(len(stop_clk_ch)))/sampling_rate
-
-
-# Getting the first and last index to find the range to plot
-# Plotting the clock channel data with the moving average and the rising edge/start record detection
-fig = plt.figure(figsize=(15,5))
-plt.subplot(211)
-
-plt.plot(time_axis_0[first_sample_0:last_sample_0],start_clk_ch[first_sample_0:last_sample_0],label = "Clock+AUX")
-plt.plot(time_axis_0[first_sample_0:last_sample_0],MA[0][first_sample_0:last_sample_0],'r', label = "Moving Average")
-
-
-
-# Converting the rising  edges list to an array 
-rising_0 = np.array(indices_r[start_record_file_no])
-# Uncomment below line to show all the rising edges
-plt.vlines(time_axis_0[rising_0[(rising_0<=last_sample_0) & (rising_0>=first_sample_0)]],0,5,'g')
-
-
-# # Uncomment below line to show start record point
-plt.vlines(time_axis_0[sorted_indices_start],0,5,'y', label = "Start Record Point")
-
-plt.xlabel("Time (s)")
-plt.ylabel("Signal Amplitude (V)")
-
-
-
-
-plt.subplot(212)
-plt.plot(time_axis_1[first_sample_1:last_sample_1],stop_clk_ch[first_sample_1:last_sample_1])
-plt.plot(time_axis_1[first_sample_1:last_sample_1],MA[1][first_sample_1:last_sample_1],'r')
-
-# Converting the rising  edges list to an array 
-rising_1 = np.array(indices_r[stop_record_file_no])
-# Uncomment below line to show all the rising edges
-plt.vlines(time_axis_1[rising_1[(rising_1<=last_sample_1) & (rising_1>=first_sample_1)]],0,5,'g')
-
-
-# Uncomment below line to show start record point
-plt.vlines(time_axis_1[sorted_indices_stop],0,5,'y')
-
-plt.xlabel("Time (s)")
-plt.ylabel("Signal Amplitude (V)")
-fig.legend()
-fig.tight_layout()
-plt.show()
-
-
-
-
-
-
-
-
-
-# Get all video names for the experiment
-video_names = glob.glob(path_video + "*.mp4")
-
-video_names.sort(key=natural_keys)
-# Getting the camera names
-temp_cam_name = []
-for i in video_names:
-    temp_cam_name.append(i.split("\\")[1].split("-")[0])
-camera_names = list(set(temp_cam_name))
-print("The camera names are:")
-print(camera_names)
-# Creating a dictionary of all videos of a single camera
-video_by_camera = defaultdict(lambda:[])
-for idx,name in enumerate(temp_cam_name):
-    video_by_camera[name].append(video_names[idx])
-
-# Creating a dictionary with the length,timestamps and fps of each video
-video_deets = defaultdict(lambda:[])
-
-# max_length = 125000
-# for item in tqdm.tqdm(video_by_camera.items()):
-#     for vid in item[1]:
-#         cap = cv2.VideoCapture(vid)
-#         length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-#         if length<max_length:
-#             max_length = length
-
-# print(max_length)
-vid_lengths = defaultdict(lambda:[])
-for item in tqdm.tqdm(video_by_camera.items()):
-    tot_length = 0
-    for idx,vid in enumerate(item[1]):
-        cap = cv2.VideoCapture(vid)
-        length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        print(f"Number of frames using opencv: {length}")
-        if length<camera_expected_no_frames:
-            length = count_frames(vid, override=True)
-            print(f"Number of frames using imutils: {length}")
-        if idx == len(item[1])-1:   # we overrite the length with the imutils length for the last video because it is more accurate
-            # length = count_frames(vid, override=True)
-            # print(f"Number of frames using imutils: {length}")
-            print(f"The total number of frames are: {tot_length+length}")
-        tot_length+=length
-        fps = cap.get(cv2.CAP_PROP_FPS)
-        for frame in range(length):
-            # video_deets[item[0]].append({"file_name":vid,"frame_no":frame,"time_from_start":frame/fps})
-            video_deets[item[0]+"_file_name"].append(vid)
-            video_deets[item[0]+"_frame_idx"].append(frame)
-            video_deets[item[0]+"_time_from_vid_start"].append(frame/camera_fps)
-        cap.release()
-    for frame in range(tot_length):
-        video_deets["concat_"+item[0]+"_frame_idx"].append(frame)
-        video_deets["concat_"+item[0]+"_time_from_vid_start"].append(frame/camera_fps)
-    vid_lengths[item[0]] = tot_length
-
-# print("Number of rising edges in each clock signal")
-
-# Converting to a dataframe
-try:
-    video_data =  pd.DataFrame.from_dict(video_deets)
-except Exception as e:
-    print(e)
+    # Uncomment below line to show start record point
+    plt.vlines(time_axis_1[sorted_indices_stop[0]],0,5,'olive', label = f"Stop Record Point for file: {clock_chs_names[stop_record_file_no]}")
+
+    plt.xlabel("Time (s)")
+    plt.ylabel("Signal Amplitude (V)")
+    fig.legend()
+    fig.tight_layout()
+
+
+    path_plot = "D:/big_setup/experiment_{}/clock_start_stop_detection_exp_{}.png".format(
+        experiment_no, experiment_no
+    )
+    # Save the plot
+    plt.savefig(path_plot, dpi=300)
+    print(f"Clock detection plot saved to: {path_plot}")
+
+    plt.close(fig)
+
+
+
+
+    # Get all video names for the experiment
+    video_names = glob.glob(path_video + "*.mp4")
+
+    video_names.sort(key=natural_keys)
+    # Getting the camera names
+    temp_cam_name = []
+    for i in video_names:
+        temp_cam_name.append(i.split("\\")[1].split("-")[0])
+    camera_names = list(set(temp_cam_name))
+    print("The camera names are:")
+    print(camera_names)
+    # Creating a dictionary of all videos of a single camera
+    video_by_camera = defaultdict(lambda:[])
+    for idx,name in enumerate(temp_cam_name):
+        video_by_camera[name].append(video_names[idx])
+
+    # Creating a dictionary with the length,timestamps and fps of each video
+    video_deets = defaultdict(lambda:[])
+
+    # max_length = 125000
+    # for item in tqdm.tqdm(video_by_camera.items()):
+    #     for vid in item[1]:
+    #         cap = cv2.VideoCapture(vid)
+    #         length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    #         if length<max_length:
+    #             max_length = length
+
+    # print(max_length)
+    vid_lengths = defaultdict(lambda:[])
+    for item in tqdm.tqdm(video_by_camera.items()):
+        tot_length = 0
+        for idx,vid in enumerate(item[1]):
+            cap = cv2.VideoCapture(vid)
+            length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+            print(f"Number of frames using opencv: {length}")
+            if length<camera_expected_no_frames:
+                length = count_frames(vid, override=True)
+                print(f"Number of frames using imutils: {length}")
+            if idx == len(item[1])-1:   # we overrite the length with the imutils length for the last video because it is more accurate
+                # length = count_frames(vid, override=True)
+                # print(f"Number of frames using imutils: {length}")
+                print(f"The total number of frames are: {tot_length+length}")
+            tot_length+=length
+            fps = cap.get(cv2.CAP_PROP_FPS)
+            for frame in range(length):
+                # video_deets[item[0]].append({"file_name":vid,"frame_no":frame,"time_from_start":frame/fps})
+                video_deets[item[0]+"_file_name"].append(vid)
+                video_deets[item[0]+"_frame_idx"].append(frame)
+                video_deets[item[0]+"_time_from_vid_start"].append(frame/camera_fps)
+            cap.release()
+        for frame in range(tot_length):
+            video_deets["concat_"+item[0]+"_frame_idx"].append(frame)
+            video_deets["concat_"+item[0]+"_time_from_vid_start"].append(frame/camera_fps)
+        vid_lengths[item[0]] = tot_length
+
+    # print("Number of rising edges in each clock signal")
+
+    # Converting to a dataframe
+    try:
+        video_data =  pd.DataFrame.from_dict(video_deets)
+    except Exception as e:
+        print(e)
+        print("The camera lengths are as follows")
+        print(vid_lengths)
+        video_data = pd.DataFrame(dict([ (k,pd.Series(v)) for k,v in video_deets.items() ]))
     print("The camera lengths are as follows")
     print(vid_lengths)
-    video_data = pd.DataFrame(dict([ (k,pd.Series(v)) for k,v in video_deets.items() ]))
-print("The camera lengths are as follows")
-print(vid_lengths)
-mic_data = defaultdict(lambda:[])
-for idx,edges in enumerate(indices_r):
-    edges = np.array(edges)
-    if idx < start_record_file_no:
-        continue
-    if idx == start_record_file_no:
-        edges = edges[edges>=start_record]
-    if idx == stop_record_file_no:
-        edges = edges[edges<=stop_record]
-    if idx > stop_record_file_no:
-        break
-    
-    print(f"Clock channel index :{idx} has {len(edges)} number of rising edges")
-    for sample in edges:
-        mic_data["clk_ch_file_name"].append(clock_chs_names[idx])
-        mic_data["clk_ch_sample_idx"].append(sample)
-        mic_data["time_from_clk_ch_start"].append(sample/sampling_rate)
-        mic_data["mics_file_idx"].append(idx)
-        if idx>0:
-            mic_data["concat_clk_ch_sample_idx"].append(sample+np.sum(length_clks[0:idx],dtype=np.int64))
-            mic_data["concat_time_from_clk_ch_start"].append((sample+np.sum(length_clks[0:idx],dtype=np.float64))/sampling_rate)
-        else:
-            mic_data["concat_clk_ch_sample_idx"].append(sample)
-            mic_data["concat_time_from_clk_ch_start"].append(sample/sampling_rate)
-
-
+    mic_data = defaultdict(lambda:[])
+    for idx,edges in enumerate(indices_r):
+        edges = np.array(edges)
+        if idx < start_record_file_no:
+            continue
+        if idx == start_record_file_no:
+            edges = edges[edges>=start_record]
+        if idx == stop_record_file_no:
+            edges = edges[edges<=stop_record]
+        if idx > stop_record_file_no:
+            break
         
-# Converting to a dataframe
-nidaq_data =  pd.DataFrame.from_dict(mic_data)
-# print(nidaq_data.head())
+        print(f"Clock channel index :{idx} has {len(edges)} number of rising edges")
+        for sample in edges:
+            mic_data["clk_ch_file_name"].append(clock_chs_names[idx])
+            mic_data["clk_ch_sample_idx"].append(sample)
+            mic_data["time_from_clk_ch_start"].append(sample/sampling_rate)
+            mic_data["mics_file_idx"].append(idx)
+            if idx>0:
+                mic_data["concat_clk_ch_sample_idx"].append(sample+np.sum(length_clks[0:idx],dtype=np.int64))
+                mic_data["concat_time_from_clk_ch_start"].append((sample+np.sum(length_clks[0:idx],dtype=np.float64))/sampling_rate)
+            else:
+                mic_data["concat_clk_ch_sample_idx"].append(sample)
+                mic_data["concat_time_from_clk_ch_start"].append(sample/sampling_rate)
 
-# Making the video data the same length as the mic data
-if len(nidaq_data) < len(video_data):
-    print(f"Number of video frames is longer and truncated by : {len(video_data)-len(nidaq_data)}")
-    video_data = video_data.iloc[:len(nidaq_data),:]
 
-if len(video_data) < len(nidaq_data):
-    print(f"Number of mic samples is longer and truncated by : {len(nidaq_data)-len(video_data)}")
-    nidaq_data = nidaq_data.iloc[:len(video_data),:]
+            
+    # Converting to a dataframe
+    nidaq_data =  pd.DataFrame.from_dict(mic_data)
+    # print(nidaq_data.head())
 
-# Joining the two dataframes
-combined_data = pd.concat([video_data, nidaq_data], axis = 1)
+    # Making the video data the same length as the mic data
+    if len(nidaq_data) < len(video_data):
+        print(f"Number of video frames is longer and truncated by : {len(video_data)-len(nidaq_data)}")
+        video_data = video_data.iloc[:len(nidaq_data),:]
 
-# Removing the last 5 seconds of data - video corruption (software issue for white matter)
-combined_data = combined_data.iloc[:len(combined_data)-camera_fps*crop_len,:]
-print(f"Removed the last {crop_len} seconds")
+    if len(video_data) < len(nidaq_data):
+        print(f"Number of mic samples is longer and truncated by : {len(nidaq_data)-len(video_data)}")
+        nidaq_data = nidaq_data.iloc[:len(video_data),:]
 
-path_timestamps = "D:/big_setup/experiment_{}/camera_timestamps.csv".format(experiment_no)
-combined_data.to_csv(path_timestamps, index= False)
+    # Joining the two dataframes
+    combined_data = pd.concat([video_data, nidaq_data], axis = 1)
+
+    # Removing the last 5 seconds of data - video corruption (software issue for white matter)
+    combined_data = combined_data.iloc[:len(combined_data)-camera_fps*crop_len,:]
+    print(f"Removed the last {crop_len} seconds")
+
+    path_timestamps = "D:/big_setup/experiment_{}/camera_timestamps.csv".format(experiment_no)
+    combined_data.to_csv(path_timestamps, index= False)
