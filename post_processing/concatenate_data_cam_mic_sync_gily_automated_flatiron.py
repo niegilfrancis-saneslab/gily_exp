@@ -68,20 +68,20 @@ for experiment_no in exps:
     # camera_corrected_sample_time = 0.03338542
     file_length = 360 # in seconds (360 sec - 6 mins)
     # nidaq_folder = "D:/big_setup/experiment_{}/nidaq/".format(experiment_no)
-    nidaq_folder = "D:/big_setup/experiment_{}/nidaq/".format(experiment_no)
-    video_folder = "D:/big_setup/experiment_{}/videos/".format(experiment_no)
+    nidaq_folder = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/nidaq/".format(experiment_no)
+    video_folder = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/videos/".format(experiment_no)
 
 
     # checking if the timestamp file is present
-    if len(glob.glob(f"D:/big_setup/experiment_{experiment_no}/camera_timestamps*csv")) == 0:
+    if len(glob.glob(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps*csv")) == 0:
         print(f"No timetsamp file found for experiment {experiment_no}, skipping it")
         continue
     # checking whether concatenation files are present
-    elif len(glob.glob(f"D:/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync/temp/*.txt")) > 0:
+    elif len(glob.glob(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync/temp/*.txt")) > 0:
         val = input(f"Do you want to rerun concatenation for experiment {experiment_no}? (y/n): ")
         if val == 'y' or val == "Y":
             print("Deleting the already present concatenated data")
-            shutil.rmtree(f"D:/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync")
+            shutil.rmtree(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync")
         else:
             print(f"Skipping experiment {experiment_no}")
             continue
@@ -112,14 +112,14 @@ for experiment_no in exps:
     video_files = glob.glob(video_folder+"*")
 
     # Creating separate folders for the concatenated data
-    path_concat = "D:/big_setup/experiment_{}/concatenated_data_cam_mic_sync/temp/".format(experiment_no)
+    path_concat = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/concatenated_data_cam_mic_sync/temp/".format(experiment_no)
 
     try:
         os.makedirs(path_concat)
     except:
         pass
 
-    path_final = "D:/big_setup/experiment_{}/concatenated_data_cam_mic_sync/".format(experiment_no)
+    path_final = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/concatenated_data_cam_mic_sync/".format(experiment_no)
 
 
 
@@ -147,7 +147,7 @@ for experiment_no in exps:
         video_by_camera[name].append(video_files[idx])
     
 
-    cam_clk_data = pd.read_csv(f"D:/big_setup/experiment_{experiment_no}/camera_timestamps.csv")
+    cam_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv")
     file_breaks  = np.arange(0,cam_clk_data.tail(1).index[0]/camera_fps,file_length)
     timestamp_idx = []
     for val in file_breaks:
@@ -261,7 +261,7 @@ for experiment_no in exps:
     ### For NIDAQ ---------------------------------------------------------------------------------------------------------------------
 
     # Reading the timestamps data for the camera clock channel 
-    audio_clk_data = pd.read_csv(f"D:/big_setup/experiment_{experiment_no}/camera_timestamps.csv")
+    audio_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv")
     audio_start_rec_idx = int(cam_clk_data["clk_ch_file_name"][0].split("\\")[1].split("_")[2])
     audio_stop_rec_idx = int(cam_clk_data["clk_ch_file_name"].iloc[-1].split("\\")[1].split("_")[2])
     start_sample_index =  int(cam_clk_data["clk_ch_sample_idx"][0])

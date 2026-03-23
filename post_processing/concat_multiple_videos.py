@@ -13,8 +13,8 @@ def atoi(text):
 def natural_keys(text):
     return [atoi(c) for c in re.split(r'(\d+)', text)]
 
-experiment_no = 530
-index = 10 
+experiment_no = 492
+index = 20
 
 search_str = "%03d"%(index)
 
@@ -37,7 +37,7 @@ for i in video_files:
 
 # writing into a video
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter(f"D:/sample_videos/exp_{experiment_no}_{search_str}.mp4", fourcc, 30.0, (1200,600), isColor=False) # the damn shape is the opposite of the array shape
+out = cv2.VideoWriter(f"D:/sync_test_videos/exp_{experiment_no}_{search_str}.mp4", fourcc, 30.0, (1200,600), isColor=False) # the damn shape is the opposite of the array shape
 
 # flag to indicate if one of the camera streams os done
 eof_flag = 0
@@ -68,7 +68,7 @@ while True:
         # print(final_frame.shape)
 
         out.write(final_frame)
-        # cv2.imshow("Output", final_frame)
+        cv2.imshow("Output", final_frame)
         if cv2.waitKey(1) & 0XFF == ord('q'): # checking if q is pressed
             print("Quitting")
             break

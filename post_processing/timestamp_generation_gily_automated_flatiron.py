@@ -26,7 +26,7 @@ for experiment_no in exps:
     print(f"Running experiment: {experiment_no}")
 
     # extracting the h5 files 
-    file_path = f"D:/big_setup/experiment_{experiment_no}/"
+    file_path = f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/"
     h5_files = glob.glob(file_path+"nidaq_h5/*.h5")
     h5_files.sort(key=natural_keys)
 
@@ -53,11 +53,11 @@ for experiment_no in exps:
     camera_expected_no_frames = 9000-1
     # camera_corrected_sample_time = 0.03338542
     sampling_rate = 125000
-    path_nidaq = "D:/big_setup/experiment_{}/nidaq/".format(experiment_no)
+    path_nidaq = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/nidaq/".format(experiment_no)
 
 
     # Path to the video data for a particular experiment
-    path_video = "D:/big_setup/experiment_{}/videos/".format(experiment_no)
+    path_video = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/videos/".format(experiment_no)
 
 
     # Deleting the trunc files if it is already present
@@ -379,7 +379,7 @@ for experiment_no in exps:
     fig.tight_layout()
 
 
-    path_plot = "D:/big_setup/experiment_{}/clock_start_stop_detection_exp_{}.png".format(
+    path_plot = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/clock_start_stop_detection_exp_{}.png".format(
         experiment_no, experiment_no
     )
     # Save the plot
@@ -502,7 +502,7 @@ for experiment_no in exps:
 
     len_nidaq = len(nidaq_data)
     len_video = len(video_data)
-    path_length_log = "D:/big_setup/experiment_{}/length_log_{}.txt".format(
+    path_length_log = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/length_log_{}.txt".format(
         experiment_no, experiment_no
     )
 
@@ -534,6 +534,6 @@ for experiment_no in exps:
     combined_data = combined_data.iloc[:len(combined_data)-camera_fps*crop_len,:]
     print(f"Removed the last {crop_len} seconds")
 
-    path_timestamps = "D:/big_setup/experiment_{}/camera_timestamps.csv".format(experiment_no)
+    path_timestamps = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/camera_timestamps.csv".format(experiment_no)
     combined_data.to_csv(path_timestamps, index= False)
 
