@@ -68,7 +68,7 @@ while True:
         # print(final_frame.shape)
 
         out.write(final_frame)
-        # cv2.imshow("Output", final_frame)
+        cv2.imshow("Output", final_frame)
         if cv2.waitKey(1) & 0XFF == ord('q'): # checking if q is pressed
             print("Quitting")
             break
