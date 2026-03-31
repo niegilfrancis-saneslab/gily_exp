@@ -21,7 +21,7 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 # Path to the nidaq data for a particular experiment
-exps = [493,494,495,496,498,499]
+exps = [530]
 for experiment_no in exps:
     print(f"Running experiment: {experiment_no}")
 

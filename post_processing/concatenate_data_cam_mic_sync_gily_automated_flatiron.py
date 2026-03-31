@@ -9,14 +9,14 @@ from scipy.io import wavfile
 import shutil
 import subprocess
 # from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-from moviepy.video.io.VideoFileClip import VideoFileClip
+# from moviepy.video.io.VideoFileClip import VideoFileClip
 from datetime import datetime, timedelta
-
-from moviepy.tools import subprocess_call
-from moviepy.config import get_setting
+import json
 
 # in order to find the path, run shutil.which after activating the environment with ffmpeg in miniforge or on the cluster
-ffmpeg = shutil.which("ffmpeg") or r"C:\Users\DAQ3\miniforge3\envs\base_env\Library\bin\ffmpeg.EXE"
+ffmpeg = shutil.which("ffmpeg") or '/mnt/home/njoseph/miniforge3/envs/common/bin/ffmpeg'
+
+exps = [530]
 
 
 
@@ -27,28 +27,46 @@ ffmpeg = shutil.which("ffmpeg") or r"C:\Users\DAQ3\miniforge3\envs\base_env\Libr
 #     # Format the time in HH:MM:SS
 #     return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{int(remainder%1*1000):03}"
 
-# def ffmpeg_extract_subclip(filename, t1, t2, targetname=None):
-def ffmpeg_extract_subclip(filename, start_frame, end_frame, targetname=None):
-    """ Makes a new video file playing video file ``filename`` between
-    the times ``t1`` and ``t2``. """
-    # !ffmpeg -i {filename} -ss {seconds_to_hms(t1)} -to {seconds_to_hms(t2)} -c copy {targetname}
-    tmp_str = f"between(n\,{start_frame}\,{end_frame}),setpts=PTS-STARTPTS"
-    
-    cmd = [ffmpeg,
-            "-i",filename,
-            "-vf",f"select={tmp_str}",
-            "-c:v", "libx264",
-            "-crf","0",
-            targetname]
+
+def ffmpeg_extract_subclip(filename, t1, t2=None, targetname=None):
+    """
+    Fast + accurate subclip extraction using hybrid seeking.
+
+    If t2 is None, extracts from t1 to end of file.
+    """
+
+    # Fast seek goes slightly BEFORE target (improves accuracy)
+    fast_seek = max(t1 - 1, 0)
+    precise_offset = t1 - fast_seek
+
+    cmd = [
+        "ffmpeg",
+        "-y",
+        "-ss", str(fast_seek),
+        "-i", filename,
+        "-ss", str(precise_offset),
+    ]
+
+    # Only include duration if t2 is provided
+    if t2 is not None:
+        duration = t2 - t1
+        if duration <= 0:
+            raise ValueError("t2 must be greater than t1")
+        cmd += ["-t", str(duration)]
+
+    cmd += [
+        "-c:v", "libx264",
+        "-crf", "18",
+        "-preset", "fast",
+        "-c:a", "copy",
+        targetname
+    ]
+
     try:
-        result = subprocess.run(cmd, check=True, capture_output = True, text= True)
-        print(f"{targetname} ran successfully.")
-
+        subprocess.run(cmd, check=True, capture_output=True, text=True)
+        print(f"{targetname} created successfully.")
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred in {targetname}: Command '{e.cmd}' returned non-zero exit status {e.returncode}.")
-        
-
-    # !ffmpeg -i {filename} -vf select={tmp_str} -c:v libx264 -crf 0 {targetname}
+        print(f"Error: {e.stderr}")
 
 
 
@@ -61,13 +79,15 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 
-exps = [493]
+
 for experiment_no in exps:
 
     camera_fps = 30
+    samples_per_cam_frame = 4166.5
+    precise_cam_fps = 125000/samples_per_cam_frame
     # camera_corrected_sample_time = 0.03338542
     file_length = 360 # in seconds (360 sec - 6 mins)
-    # nidaq_folder = "D:/big_setup/experiment_{}/nidaq/".format(experiment_no)
+    # nidaq_folder = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/nidaq/".format(experiment_no)
     nidaq_folder = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/nidaq/".format(experiment_no)
     video_folder = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/videos/".format(experiment_no)
 
@@ -164,16 +184,17 @@ for experiment_no in exps:
 
 
             try:
-                temp = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_file_name'].split('\\')
+                temp = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_file_name']
             except:
                 print("Index from timestamp not found")
                 pass
             
             if temp[0]+'/'+temp[1] == vid_name and index != no_videos -1 :
-                #break_time = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_time_from_vid_start']
+                # break_time = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_time_from_vid_start']
                 break_frame = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_frame_idx']
+                break_time = break_frame/precise_cam_fps
                 target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_0.mp4"
-                ffmpeg_extract_subclip(vid_name, 0, break_frame, targetname=target_file)
+                ffmpeg_extract_subclip(vid_name, 0.0, break_time, targetname=target_file)
                 
                 # with VideoFileClip(vid_name) as video:
                 #     new = video.subclip(0.0, break_time)
@@ -184,11 +205,11 @@ for experiment_no in exps:
 
 
                 target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_1.mp4"
-                with VideoFileClip(vid_name) as video:
-                    #end_time = video.duration
-                    end_frame = video.reader.nframes
+                # with VideoFileClip(vid_name) as video:
+                    # end_time = video.duration
+                    # end_frame = video.reader.nframes
 
-                ffmpeg_extract_subclip(vid_name, break_frame, end_frame, targetname=target_file)
+                ffmpeg_extract_subclip(vid_name, break_time, None, targetname=target_file)
 
 
 
@@ -202,18 +223,18 @@ for experiment_no in exps:
 
             elif temp[0]+'/'+temp[1] != vid_name and index == no_videos -1:
                 cam_stop_rec_video_name = cam_clk_data[f"{cam}_file_name"].iloc[-1]
-                try:
-                    cam_stop_rec_frame = int(cam_clk_data[f"{cam}_frame_idx"].iloc[-1])
-                except Exception as e: # trying to catch exceptions that arise when the video is not long enough (camera drop/frame drop)
-                    print(e)
-                    cam_stop_rec_frame = None
+                # try:
+                #     cam_stop_rec_frame = int(cam_clk_data[f"{cam}_frame_idx"].iloc[-1])
+                # except Exception as e: # trying to catch exceptions that arise when the video is not long enough (camera drop/frame drop)
+                #     print(e)
+                #     cam_stop_rec_frame = None
                 
-                target_file = vid_name.split(".")[0]+"_trunc_0.mp4"
+                # target_file = vid_name.split(".")[0]+"_trunc_0.mp4"
 
-                if cam_stop_rec_frame == None:
-                    target_file = cam_stop_rec_video_name
-                else:
-                    ffmpeg_extract_subclip(cam_stop_rec_video_name, 0, cam_stop_rec_frame, targetname=target_file)
+                # if cam_stop_rec_frame == None:
+                #     target_file = cam_stop_rec_video_name
+                # else:
+                ffmpeg_extract_subclip(cam_stop_rec_video_name, 0.0, None, targetname=target_file)
                     
 
                 f.write("file \'{}\'\n".format(target_file))
@@ -231,39 +252,43 @@ for experiment_no in exps:
 
                 #break_time = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_time_from_vid_start']
                 break_frame = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_frame_idx']
+                break_time = break_frame/precise_cam_fps
                 target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_0.mp4"
                 if cam_stop_rec_frame == None:
-                    target_file = cam_stop_rec_video_name
+                    target_file = os.path.dirname(vid_name)+"/"+os.path.basename(vid_name).split(".")[0]+"_trunc_111.mp4"
+                    ffmpeg_extract_subclip(vid_name, 0, None, targetname=target_file)
                 else:
-                    ffmpeg_extract_subclip(vid_name, 0, break_frame, targetname=target_file)
+                    ffmpeg_extract_subclip(vid_name, 0, break_time, targetname=target_file)
 
 
                 f.write("file \'{}\'\n".format(target_file))
                 f.close()
 
-                if cam_stop_rec_frame != None:
-                    target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_1.mp4"
-                    #end_time = (cam_stop_rec_frame+1)/camera_fps
-                    end_frame = cam_stop_rec_frame
-                    ffmpeg_extract_subclip(vid_name, break_frame, end_frame, targetname=target_file)
-                    
-                    file_concat_index+=1
-                    str_1 = "%03d"%(file_concat_index)
-                    filename_txt = path_concat + f"video_{cam}_{str_1}.txt"
-                    f = open(filename_txt, 'w')
-                    f.write("file \'{}\'\n".format(target_file))
-                    f.close()
+                # if cam_stop_rec_frame != None:
+                #     target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_1.mp4"
+                #     #end_time = (cam_stop_rec_frame+1)/camera_fps
+                #     # end_frame = cam_stop_rec_frame
+                ffmpeg_extract_subclip(vid_name, break_time, None, targetname=target_file)
+                
+                file_concat_index+=1
+                str_1 = "%03d"%(file_concat_index)
+                filename_txt = path_concat + f"video_{cam}_{str_1}.txt"
+                f = open(filename_txt, 'w')
+                f.write("file \'{}\'\n".format(target_file))
+                f.close()
 
             elif index != no_videos -1:
-                f.write("file \'{}\'\n".format(vid_name))
+                target_file = os.path.dirname(vid_name)+"/"+os.path.basename(vid_name).split(".")[0]+"_trunc_111.mp4"
+                ffmpeg_extract_subclip(vid_name, 0.0, None, targetname=target_file)
+                f.write("file \'{}\'\n".format(target_file))
 
             
     ### For NIDAQ ---------------------------------------------------------------------------------------------------------------------
 
     # Reading the timestamps data for the camera clock channel 
     audio_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv")
-    audio_start_rec_idx = int(cam_clk_data["clk_ch_file_name"][0].split("\\")[1].split("_")[2])
-    audio_stop_rec_idx = int(cam_clk_data["clk_ch_file_name"].iloc[-1].split("\\")[1].split("_")[2])
+    audio_start_rec_idx = int(cam_clk_data["clk_ch_file_name"][0].split("/")[-1].split("_")[2])
+    audio_stop_rec_idx = int(cam_clk_data["clk_ch_file_name"].iloc[-1].split("/")[-1].split("_")[2])
     start_sample_index =  int(cam_clk_data["clk_ch_sample_idx"][0])
     end_sample_index =  int(cam_clk_data["clk_ch_sample_idx"].iloc[-1])
 
@@ -389,7 +414,7 @@ for experiment_no in exps:
     time_ends = []
     column_names = [i for i in timestamp_record_data.columns if i.endswith("file_name") and not(i.startswith('clk'))]
 
-    starting_timestamp = datetime.strptime(timestamp_record_data[column_names[0]][0].split('\\')[-1].split('-')[1], '%Y%m%dT%H%M%S')
+    starting_timestamp = datetime.strptime(timestamp_record_data[column_names[0]][0].split('/')[-1].split('-')[1], '%Y%m%dT%H%M%S')
 
     matched_csv = []
     timestamp_write = starting_timestamp
@@ -418,12 +443,12 @@ for experiment_no in exps:
     audio_files = []
 
     for file in txt_files:
-        name = file.split('\\')[-1].split(".")[0]
+        name = file.split('/')[-1].split(".")[0]
         full_path_txt = path_concat+name+".txt"
-        full_path_txt = full_path_txt.replace("/","\\")
+        # full_path_txt = full_path_txt.replace("/","\\")
         if name[0] == "c":
             full_path_wav = path_final+name+".wav"
-            full_path_wav = full_path_wav.replace("/","\\")
+            # full_path_wav = full_path_wav.replace("/","\\")
             cmd = [ffmpeg,
                     "-f", "concat",
                     "-safe", "0",
@@ -440,7 +465,7 @@ for experiment_no in exps:
             # -rf64 auto
         else:
             full_path_mp4 = path_final+name+".mp4"
-            full_path_mp4 = full_path_mp4.replace("/","\\")
+            # full_path_mp4 = full_path_mp4.replace("/","\\")
             cmd = [ffmpeg,
                     "-f", "concat",
                     "-safe", "0",
