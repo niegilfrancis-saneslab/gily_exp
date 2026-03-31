@@ -98,13 +98,14 @@ def process_experiments(exps):
             continue
         # checking whether concatenation files are present
         elif len(glob.glob(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync/temp/*.txt")) > 0:
-            val = input(f"Do you want to rerun concatenation for experiment {experiment_no}? (y/n): ")
-            if val == 'y' or val == "Y":
-                print("Deleting the already present concatenated data")
-                shutil.rmtree(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync")
-            else:
-                print(f"Skipping experiment {experiment_no}")
-                continue
+                print(f"Skipping experiment {experiment_no}, delete concatenation data if you'd like to run this experiment")
+            # val = input(f"Do you want to rerun concatenation for experiment {experiment_no}? (y/n): ")
+            # if val == 'y' or val == "Y":
+            #     print("Deleting the already present concatenated data")
+            #     shutil.rmtree(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync")
+            # else:
+            #     print(f"Skipping experiment {experiment_no}")
+            #     continue
 
 
 
