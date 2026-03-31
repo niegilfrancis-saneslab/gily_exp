@@ -398,7 +398,7 @@ for experiment_no in exps:
     # Getting the camera names
     temp_cam_name = []
     for i in video_names:
-        temp_cam_name.append(i.split("\\")[1].split("-")[0])
+        temp_cam_name.append(i.split("/")[-1].split("-")[0])
     camera_names = list(set(temp_cam_name))
     print("The camera names are:")
     print(camera_names)
