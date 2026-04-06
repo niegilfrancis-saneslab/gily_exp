@@ -1,0 +1,10 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu010
+Sat Apr  4 15:43:48 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 505
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running concatenation

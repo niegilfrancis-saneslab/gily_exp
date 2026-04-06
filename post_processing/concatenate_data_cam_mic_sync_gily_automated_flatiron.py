@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 import json
 import sys
 
+
 # in order to find the path, run shutil.which after activating the environment with ffmpeg in miniforge or on the cluster
 ffmpeg = shutil.which("ffmpeg") or '/mnt/home/njoseph/miniforge3/envs/common/bin/ffmpeg'
 
@@ -54,9 +55,9 @@ def ffmpeg_extract_subclip(filename, t1, t2=None, targetname=None):
         cmd += ["-t", str(duration)]
 
     cmd += [
-        "-c:v", "libx264",
-        "-crf", "18",
-        "-preset", "fast",
+        "-c:v", "h264_nvenc",
+        "-cq", "19", # similar to CRF (lower = better quality)
+        "-preset", "medium", # NVENC preset (p1 fastest → p7 best quality)
         "-c:a", "copy",
         targetname
     ]
@@ -78,9 +79,8 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 
-def process_experiments(exps):
-
-    for experiment_no in exps:
+def process_experiment(experiment_no):
+        print(f"======================================================== Working on experiment: {experiment_no} ========================================================")
 
         camera_fps = 30
         samples_per_cam_frame = 4166.5
@@ -95,10 +95,11 @@ def process_experiments(exps):
         # checking if the timestamp file is present
         if len(glob.glob(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps*csv")) == 0:
             print(f"No timetsamp file found for experiment {experiment_no}, skipping it")
-            continue
+            return
         # checking whether concatenation files are present
         elif len(glob.glob(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/concatenated_data_cam_mic_sync/temp/*.txt")) > 0:
-                print(f"Skipping experiment {experiment_no}, delete concatenation data if you'd like to run this experiment")
+            print(f"Skipping experiment {experiment_no}, delete concatenation data if you'd like to run this experiment")
+            return 
             # val = input(f"Do you want to rerun concatenation for experiment {experiment_no}? (y/n): ")
             # if val == 'y' or val == "Y":
             #     print("Deleting the already present concatenated data")
@@ -168,12 +169,14 @@ def process_experiments(exps):
             video_by_camera[name].append(video_files[idx])
         
 
-        cam_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv")
+        cam_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv", low_memory=False)
         file_breaks  = np.arange(0,cam_clk_data.tail(1).index[0]/camera_fps,file_length)
         timestamp_idx = []
         for val in file_breaks:
             timestamp_idx.append((np.abs(cam_clk_data[f'concat_{camera_names[0]}_time_from_vid_start'] - val)).argmin())
         for cam in camera_names:
+
+            print(f"Working on camera: {cam}")
             file_break_idx = 1
             file_concat_index = 0 
             str_1 = "%03d"%(file_concat_index)
@@ -181,20 +184,20 @@ def process_experiments(exps):
             f = open(filename_txt, 'w')
             no_videos = len(video_by_camera[cam])
 
-            for index, vid_name in enumerate(video_by_camera[cam]):
+            for index, vid_name in tqdm.tqdm(enumerate(video_by_camera[cam])):
 
-
+                
                 try:
                     temp = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_file_name']
                 except:
                     print("Index from timestamp not found")
                     pass
                 
-                if temp[0]+'/'+temp[1] == vid_name and index != no_videos -1 :
+                if temp == vid_name and index != no_videos -1 :
                     # break_time = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_time_from_vid_start']
                     break_frame = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_frame_idx']
                     break_time = break_frame/precise_cam_fps
-                    target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_0.mp4"
+                    target_file = temp.split(".")[0]+"_trunc_0.mp4"
                     ffmpeg_extract_subclip(vid_name, 0.0, break_time, targetname=target_file)
                     
                     # with VideoFileClip(vid_name) as video:
@@ -205,7 +208,7 @@ def process_experiments(exps):
                     f.close()
 
 
-                    target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_1.mp4"
+                    target_file = temp.split(".")[0]+"_trunc_1.mp4"
                     # with VideoFileClip(vid_name) as video:
                         # end_time = video.duration
                         # end_frame = video.reader.nframes
@@ -222,8 +225,8 @@ def process_experiments(exps):
                     f.write("file \'{}\'\n".format(target_file))
 
 
-                elif temp[0]+'/'+temp[1] != vid_name and index == no_videos -1:
-                    cam_stop_rec_video_name = cam_clk_data[f"{cam}_file_name"].iloc[-1]
+                elif temp != vid_name and index == no_videos -1:
+                    #cam_stop_rec_video_name = cam_clk_data[f"{cam}_file_name"].iloc[-1]
                     # try:
                     #     cam_stop_rec_frame = int(cam_clk_data[f"{cam}_frame_idx"].iloc[-1])
                     # except Exception as e: # trying to catch exceptions that arise when the video is not long enough (camera drop/frame drop)
@@ -235,13 +238,13 @@ def process_experiments(exps):
                     # if cam_stop_rec_frame == None:
                     #     target_file = cam_stop_rec_video_name
                     # else:
-                    ffmpeg_extract_subclip(cam_stop_rec_video_name, 0.0, None, targetname=target_file)
+                    ffmpeg_extract_subclip(vid_name, 0.0, None, targetname=target_file)
                         
 
                     f.write("file \'{}\'\n".format(target_file))
                     f.close()
 
-                elif temp[0]+'/'+temp[1] == vid_name and index == no_videos -1:
+                elif temp == vid_name and index == no_videos -1:
                     cam_stop_rec_video_name = cam_clk_data[f"{cam}_file_name"].iloc[-1]
                     # cam_stop_rec_frame = int(cam_clk_data[f"{cam}_frame_idx"].iloc[-1])
 
@@ -254,7 +257,7 @@ def process_experiments(exps):
                     #break_time = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_time_from_vid_start']
                     break_frame = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'{cam}_frame_idx']
                     break_time = break_frame/precise_cam_fps
-                    target_file = temp[0]+"/"+temp[1].split(".")[0]+"_trunc_0.mp4"
+                    target_file = temp.split(".")[0]+"_trunc_0.mp4"
                     if cam_stop_rec_frame == None:
                         target_file = os.path.dirname(vid_name)+"/"+os.path.basename(vid_name).split(".")[0]+"_trunc_111.mp4"
                         ffmpeg_extract_subclip(vid_name, 0, None, targetname=target_file)
@@ -287,7 +290,7 @@ def process_experiments(exps):
         ### For NIDAQ ---------------------------------------------------------------------------------------------------------------------
 
         # Reading the timestamps data for the camera clock channel 
-        audio_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv")
+        #audio_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv",low_memory=False)
         audio_start_rec_idx = int(cam_clk_data["clk_ch_file_name"][0].split("/")[-1].split("_")[2])
         audio_stop_rec_idx = int(cam_clk_data["clk_ch_file_name"].iloc[-1].split("/")[-1].split("_")[2])
         start_sample_index =  int(cam_clk_data["clk_ch_sample_idx"][0])
@@ -305,7 +308,7 @@ def process_experiments(exps):
             for idx,j in tqdm.tqdm(enumerate(nidaq_files[i::no_channels])):
                     
                     try:
-                        break_channel_idx = int(audio_clk_data.iloc[timestamp_idx[file_break_idx]][f'clk_ch_file_name'].split('_')[-2])
+                        break_channel_idx = int(cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'clk_ch_file_name'].split('_')[-2])
                     except:
                         pass
 
@@ -320,7 +323,7 @@ def process_experiments(exps):
 
                     elif idx == break_channel_idx and idx!= audio_stop_rec_idx:
 
-                        break_sample_idx = audio_clk_data.iloc[timestamp_idx[file_break_idx]][f'clk_ch_sample_idx']
+                        break_sample_idx = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'clk_ch_sample_idx']
             
                         # Loading the file
                         sampling_rate,ch = wavfile.read(j)
@@ -361,7 +364,7 @@ def process_experiments(exps):
 
                     elif idx == break_channel_idx and idx == audio_stop_rec_idx:
 
-                        break_sample_idx = audio_clk_data.iloc[timestamp_idx[file_break_idx]][f'clk_ch_sample_idx']
+                        break_sample_idx = cam_clk_data.iloc[timestamp_idx[file_break_idx]][f'clk_ch_sample_idx']
 
 
                         target_file = j.split(".")[0]+"_trunc_0.wav"
@@ -491,8 +494,12 @@ def process_experiments(exps):
             os.remove(i) 
 
 # sample run script: python concatenate_data_cam_mic_sync_gily_automated_flatiron.py 493 494 495
+
 if __name__ == "__main__":
     exps = list(map(int, sys.argv[1:]))
-    if isinstance(exps, int):
-        exps = [exps]
-    process_experiments(exps)
+
+    from multiprocessing import Pool, cpu_count
+    n_workers = min(len(exps), 4)
+
+    with Pool(n_workers) as pool:
+        pool.map(process_experiment, exps)

@@ -1,0 +1,125 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu018
+Fri Apr  3 14:48:35 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 495
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running concatenation
+Camera names: 
+ ['nest_side', 'burrow_top', 'nest_other_side', 'burrow_side', 'nest_top', 'center', 'gily_center']
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_side-20260219T145032-145533_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_side-20260219T145533-150033_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_side-20260219T145533-150033_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_side-20260219T145533-150033_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_top-20260219T145032-145532_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_top-20260219T145532-150033_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_top-20260219T145532-150033_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_top-20260219T145532-150033_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_other_side-20260219T145032-145533_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_other_side-20260219T145533-150033_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_other_side-20260219T145533-150033_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_other_side-20260219T145533-150033_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_side-20260219T145032-145532_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_side-20260219T145532-150033_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_side-20260219T145532-150033_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/burrow_side-20260219T145532-150033_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_top-20260219T145032-145532_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_top-20260219T145532-150033_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_top-20260219T145532-150033_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/nest_top-20260219T145532-150033_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/center-20260219T145032-145532_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/center-20260219T145532-150033_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/center-20260219T145532-150033_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/center-20260219T145532-150033_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/gily_center-20260219T145032-145533_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/gily_center-20260219T145533-150034_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/gily_center-20260219T145533-150034_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/videos/gily_center-20260219T145533-150034_trunc_1.mp4 created successfully.
+0it [00:00, ?it/s]1it [00:01,  1.40s/it]2it [00:02,  1.51s/it]2it [00:04,  2.21s/it]
+0it [00:00, ?it/s]1it [00:01,  1.24s/it]2it [00:02,  1.52s/it]2it [00:04,  2.20s/it]
+0it [00:00, ?it/s]1it [00:01,  1.49s/it]2it [00:03,  1.52s/it]2it [00:04,  2.03s/it]
+0it [00:00, ?it/s]1it [00:01,  1.63s/it]2it [00:03,  1.84s/it]2it [00:04,  2.45s/it]
+0it [00:00, ?it/s]1it [00:00,  1.00it/s]2it [00:02,  1.41s/it]2it [00:03,  2.00s/it]
+0it [00:00, ?it/s]1it [00:01,  1.27s/it]2it [00:03,  1.63s/it]2it [00:04,  2.26s/it]
+0it [00:00, ?it/s]1it [00:01,  1.15s/it]2it [00:02,  1.39s/it]2it [00:04,  2.01s/it]
+0it [00:00, ?it/s]1it [00:01,  1.21s/it]2it [00:02,  1.42s/it]2it [00:04,  2.04s/it]
+0it [00:00, ?it/s]1it [00:01,  1.51s/it]2it [00:03,  1.58s/it]2it [00:04,  2.31s/it]
+0it [00:00, ?it/s]1it [00:01,  1.49s/it]2it [00:02,  1.49s/it]2it [00:04,  2.26s/it]
+0it [00:00, ?it/s]1it [00:01,  1.46s/it]2it [00:03,  1.78s/it]2it [00:04,  2.35s/it]
+0it [00:00, ?it/s]1it [00:01,  1.79s/it]2it [00:03,  1.46s/it]2it [00:04,  2.07s/it]
+0it [00:00, ?it/s]1it [00:01,  1.25s/it]2it [00:02,  1.22s/it]2it [00:03,  1.86s/it]
+0it [00:00, ?it/s]1it [00:01,  1.20s/it]2it [00:02,  1.32s/it]2it [00:04,  2.01s/it]
+0it [00:00, ?it/s]1it [00:01,  1.36s/it]2it [00:02,  1.40s/it]2it [00:03,  1.99s/it]
+0it [00:00, ?it/s]1it [00:01,  1.53s/it]2it [00:02,  1.46s/it]2it [00:04,  2.16s/it]
+0it [00:00, ?it/s]1it [00:01,  1.19s/it]2it [00:02,  1.40s/it]2it [00:03,  1.94s/it]
+0it [00:00, ?it/s]1it [00:01,  1.02s/it]2it [00:02,  1.40s/it]2it [00:03,  1.87s/it]
+0it [00:00, ?it/s]1it [00:01,  1.58s/it]2it [00:03,  1.51s/it]2it [00:04,  2.07s/it]
+0it [00:00, ?it/s]1it [00:01,  1.31s/it]2it [00:02,  1.31s/it]2it [00:03,  1.78s/it]
+0it [00:00, ?it/s]1it [00:00,  1.01it/s]2it [00:02,  1.13s/it]2it [00:03,  1.60s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_05_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_16_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_07_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_center_001.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_burrow_side_000.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_06_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_burrow_top_001.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_burrow_top_000.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_01_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_12_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_01_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_09_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_nest_top_001.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_09_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_00_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_03_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_20_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_08_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_19_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_02_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_20_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_nest_other_side_000.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_14_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_15_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_00_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_11_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_nest_side_000.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_10_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_11_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_17_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_05_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_center_000.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_burrow_side_001.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_gily_center_001.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_08_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_04_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_07_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_04_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_18_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_12_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_02_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_13_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_18_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_13_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_gily_center_000.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_nest_other_side_001.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_17_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_nest_side_001.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_15_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_03_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_06_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_16_file_001.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_10_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/video_nest_top_000.mp4 ran successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_14_file_000.wav ran successfully
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_495/concatenated_data_cam_mic_sync/channel_19_file_001.wav ran successfully
+Fri Apr  3 15:38:10 EDT 2026

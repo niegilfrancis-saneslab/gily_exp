@@ -1,10 +1,12 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -p gpu
+#SBATCH -C rtxblackwell
 #SBATCH -c 4
 #SBATCH --gpus=1
-#SBATCH --mem=64GB
-#SBATCH --time=48:00:00
+#SBATCH --reservation=rocky9
+#SBATCH --mem=128GB
+#SBATCH --time=5-00:00:00
 #SBATCH -o /mnt/home/njoseph/gily_exp/post_processing/sync_logs/concat_log_%j.log
 pwd; hostname; date;
 
@@ -13,6 +15,7 @@ pwd; hostname; date;
 # sbatch /mnt/home/njoseph/gily_exp/post_processing/run_concat.sh
 ##################################################
 
+nvidia-smi;
 echo "Setting up environment"
 source /mnt/home/njoseph/miniforge3/bin/activate;
 conda activate common;

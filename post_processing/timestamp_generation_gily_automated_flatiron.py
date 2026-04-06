@@ -140,6 +140,12 @@ def process_experiments(exps):
 
         indices_r = temp_r_0
 
+        # logging the number of rising edges per file
+        log_strings = []
+        for ch, edges in zip(clock_chs_names,indices_r):
+            log_strings.append(f"channel {ch} has {len(edges)} rising edges \n")
+            
+
 
         print("Automatically detecting start and stop record positions")
 
@@ -389,9 +395,16 @@ def process_experiments(exps):
         print(f"Clock detection plot saved to: {path_plot}")
 
         plt.close(fig)
-
+        
+        path_length_log = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/length_log_{}.txt".format(
+                experiment_no, experiment_no
+            )
 
         with open(path_length_log, "w") as f:
+
+            for string in log_strings:
+                f.write(string)
+                
 
             # Get all video names for the experiment
             video_names = glob.glob(path_video + "*.mp4")
@@ -425,14 +438,14 @@ def process_experiments(exps):
                     cap = cv2.VideoCapture(vid)
                     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
-                    message = f"Number of frames using opencv: {length}\n"
+                    message = f"Number of frames in {vid} using opencv: {length}\n"
                     f.write(message)
 
                     if length<camera_expected_no_frames:
                         length = count_frames(vid, override=True)
 
 
-                        message = f"Number of frames using imutils: {length}\n"
+                        message = f"Number of frames in {vid} using imutils: {length}\n"
                         f.write(message)
 
                     if idx == len(item[1])-1:   # we overrite the length with the imutils length for the last video because it is more accurate
@@ -498,9 +511,7 @@ def process_experiments(exps):
 
             len_nidaq = len(nidaq_data)
             len_video = len(video_data)
-            path_length_log = "/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{}/length_log_{}.txt".format(
-                experiment_no, experiment_no
-            )
+
 
         
             if len_nidaq < len_video:

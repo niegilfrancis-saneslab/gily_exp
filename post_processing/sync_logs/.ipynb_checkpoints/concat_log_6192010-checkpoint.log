@@ -1,0 +1,12 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu025
+Sat Apr  4 15:26:40 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 496
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running concatenation
+/mnt/home/njoseph/gily_exp/post_processing/concatenate_data_cam_mic_sync_gily_automated_flatiron.py:171: DtypeWarning: Columns (5) have mixed types. Specify dtype option on import or set low_memory=False.
+  cam_clk_data = pd.read_csv(f"/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_{experiment_no}/camera_timestamps.csv")

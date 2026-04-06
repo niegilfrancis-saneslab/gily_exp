@@ -3,7 +3,7 @@
 #SBATCH -p gpu
 #SBATCH -c 4
 #SBATCH --gpus=1
-#SBATCH --mem=64GB
+#SBATCH --mem=128GB
 #SBATCH --time=48:00:00
 #SBATCH -o /mnt/home/njoseph/gily_exp/post_processing/sync_logs/timestamp_log_%j.log
 pwd; hostname; date;

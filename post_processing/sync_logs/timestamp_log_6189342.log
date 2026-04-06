@@ -1,0 +1,87 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu069
+Fri Apr  3 14:49:36 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 503
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 503
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:00,  5.66it/s]3it [00:00,  9.59it/s]5it [00:00,  9.84it/s]6it [00:00,  6.36it/s]7it [00:00,  7.05it/s]9it [00:01,  8.85it/s]10it [00:01,  8.82it/s]10it [00:01,  8.25it/s]
+Automatically detected clock channel: 20
+Getting the rising and falling edges in the clock signal
+  0%|                                                                                                                                                                         | 0/10 [00:00<?, ?it/s] 10%|████████████████                                                                                                                                                 | 1/10 [00:01<00:10,  1.14s/it] 20%|████████████████████████████████▏                                                                                                                                | 2/10 [00:02<00:11,  1.43s/it] 30%|████████████████████████████████████████████████▎                                                                                                                | 3/10 [00:04<00:10,  1.47s/it] 40%|████████████████████████████████████████████████████████████████▍                                                                                                | 4/10 [00:05<00:09,  1.56s/it] 50%|████████████████████████████████████████████████████████████████████████████████▌                                                                                | 5/10 [00:06<00:06,  1.34s/it] 60%|████████████████████████████████████████████████████████████████████████████████████████████████▌                                                                | 6/10 [00:09<00:06,  1.68s/it] 70%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                                                | 7/10 [00:10<00:04,  1.58s/it] 80%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                | 8/10 [00:11<00:02,  1.46s/it] 90%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                | 9/10 [00:13<00:01,  1.48s/it]100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:15<00:00,  1.58s/it]100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:15<00:00,  1.52s/it]
+Clock channel lengths
+[37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000]
+Automatically detecting start and stop record positions
+  0%|                                                                                                                                                                         | 0/10 [00:00<?, ?it/s] 10%|████████████████                                                                                                                                                 | 1/10 [00:00<00:08,  1.05it/s] 20%|████████████████████████████████▏                                                                                                                                | 2/10 [00:01<00:07,  1.05it/s] 30%|████████████████████████████████████████████████▎                                                                                                                | 3/10 [00:02<00:06,  1.05it/s] 40%|████████████████████████████████████████████████████████████████▍                                                                                                | 4/10 [00:03<00:05,  1.05it/s] 50%|████████████████████████████████████████████████████████████████████████████████▌                                                                                | 5/10 [00:04<00:04,  1.05it/s] 60%|████████████████████████████████████████████████████████████████████████████████████████████████▌                                                                | 6/10 [00:05<00:03,  1.05it/s] 70%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                                                | 7/10 [00:06<00:02,  1.05it/s] 80%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                | 8/10 [00:07<00:01,  1.05it/s] 90%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                | 9/10 [00:08<00:00,  1.05it/s]100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:09<00:00,  1.06it/s]100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:09<00:00,  1.05it/s]
+Start record detected in file index: 0
+Stop record detected in file index: 9
+Getting the moving average of the first and last clock signal
+  0%|                                                                                                                                                                          | 0/2 [00:00<?, ?it/s] 50%|█████████████████████████████████████████████████████████████████████████████████                                                                                 | 1/2 [00:00<00:00,  1.07it/s]100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.08it/s]100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.07it/s]
+Getting the index for start record
+0it [00:00, ?it/s]8999it [00:00, 323507.08it/s]
+Difference:  -1.6586042121231586
+Value:  -1.6734245911963102
+Set value of indices start
+Difference:  -1.6814735108593937
+Value:  -1.6731869921453058
+Set value of indices start
+Getting the index for stop record
+0it [00:00, ?it/s]7039it [00:00, 331072.33it/s]
+The indices are: [5351827 5355994]
+The indices are: [28849249]
+Start record sample index: 5351827
+Stop record sample index: 28849249
+Clock detection plot saved to: /mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_503/clock_start_stop_detection_exp_503.png
+  0%|                                                                                                                                                                          | 0/7 [00:00<?, ?it/s][h264 @ 0x55555cc2ca00] Invalid NAL unit size (112056 > 65136).
+[h264 @ 0x55555cc2ca00] missing picture in access unit with size 65168
+[h264 @ 0x55555bb83340] Invalid NAL unit size (112056 > 65136).
+[h264 @ 0x55555bb83340] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55555c89a100] stream 0, offset 0x94758f9: partial file
+ 14%|███████████████████████▏                                                                                                                                          | 1/7 [01:09<06:57, 69.51s/it][h264 @ 0x55555a6f0fc0] Invalid NAL unit size (22662 > 16711).
+[h264 @ 0x55555a6f0fc0] missing picture in access unit with size 16715
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55555af96dc0] stream 0, offset 0x895417e: partial file
+[h264 @ 0x55555b17ae40] Invalid NAL unit size (22662 > 16711).
+[h264 @ 0x55555b17ae40] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55555af96dc0] stream 0, offset 0x89599dc: partial file
+ 29%|██████████████████████████████████████████████▎                                                                                                                   | 2/7 [02:20<05:51, 70.24s/it][h264 @ 0x55555d3388c0] Invalid NAL unit size (135654 > 97904).
+[h264 @ 0x55555d3388c0] missing picture in access unit with size 97936
+[h264 @ 0x55555ae1c4c0] Invalid NAL unit size (135654 > 97904).
+[h264 @ 0x55555ae1c4c0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55555af8de40] stream 0, offset 0x80ae2ff: partial file
+ 43%|█████████████████████████████████████████████████████████████████████▍                                                                                            | 3/7 [03:16<04:15, 63.88s/it][h264 @ 0x55555ae1e540] Invalid NAL unit size (123547 > 65136).
+[h264 @ 0x55555ae1e540] missing picture in access unit with size 65168
+[h264 @ 0x55555ae1bc80] Invalid NAL unit size (123547 > 65136).
+[h264 @ 0x55555ae1bc80] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555559f2c700] stream 0, offset 0x733bcda: partial file
+ 57%|████████████████████████████████████████████████████████████████████████████████████████████▌                                                                     | 4/7 [04:07<02:56, 58.78s/it][h264 @ 0x55555c89b000] Invalid NAL unit size (147571 > 65136).
+[h264 @ 0x55555c89b000] missing picture in access unit with size 65168
+[h264 @ 0x55555b17a9c0] Invalid NAL unit size (147571 > 65136).
+[h264 @ 0x55555b17a9c0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555559f30900] stream 0, offset 0x9326417: partial file
+ 71%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                                              | 5/7 [05:13<02:02, 61.34s/it][h264 @ 0x55555d8ff640] Invalid NAL unit size (131136 > 32368).
+[h264 @ 0x55555d8ff640] missing picture in access unit with size 32400
+[h264 @ 0x555559e9f880] Invalid NAL unit size (131136 > 32368).
+[h264 @ 0x555559e9f880] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55555cc90000] stream 0, offset 0x9d24212: partial file
+ 86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                       | 6/7 [06:22<01:03, 63.86s/it][h264 @ 0x55555af99540] Invalid NAL unit size (185386 > 65136).
+[h264 @ 0x55555af99540] missing picture in access unit with size 65168
+[h264 @ 0x55555d8f5040] Invalid NAL unit size (185386 > 65136).
+[h264 @ 0x55555d8f5040] Error splitting the input into NAL units.
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [07:30<00:00, 65.32s/it]100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [07:30<00:00, 64.36s/it]
+Clock channel index :0 has 7716 number of rising edges
+Clock channel index :1 has 9000 number of rising edges
+Clock channel index :2 has 9000 number of rising edges
+Clock channel index :3 has 9000 number of rising edges
+Clock channel index :4 has 9000 number of rising edges
+Clock channel index :5 has 9000 number of rising edges
+Clock channel index :6 has 9001 number of rising edges
+Clock channel index :7 has 9000 number of rising edges
+Clock channel index :8 has 9000 number of rising edges
+Clock channel index :9 has 6924 number of rising edges
+NIDAQ data is longer by 19 samples
+Fri Apr  3 14:58:03 EDT 2026

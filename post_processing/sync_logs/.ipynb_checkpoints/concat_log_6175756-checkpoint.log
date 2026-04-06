@@ -1,0 +1,11 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu021
+Tue Mar 31 16:21:14 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 492
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running concatenation
+slurmstepd: error: *** JOB 6175756 ON workergpu021 CANCELLED AT 2026-03-31T16:27:54 ***
