@@ -64,8 +64,8 @@ channels = ["PXI1Slot2/ai0", # nest - mic 4
             # "PXI1Slot3/ai5",  # mic 17
             "PXI1Slot3/ai6", # mic 18
             # "PXI1Slot3/ai7", # mic 19 - last lowered mic 
-            "PXI1Slot4/ai3", # headmounted Mic 1 Transceiver A
-            "PXI1Slot4/ai4", # headmounted Mic 2 Transceiver B
+            # "PXI1Slot4/ai3", # headmounted Mic 1 Transceiver A
+            # "PXI1Slot4/ai4", # headmounted Mic 2 Transceiver B
             "PXI1Slot4/ai5", # Robot TTL 
             "PXI1Slot4/ai6", # Playback TTL
             "PXI1Slot4/ai7"] # Camera TTL
@@ -79,7 +79,7 @@ channels = ["PXI1Slot2/ai0", # nest - mic 4
 # Variables to store data in chunks for the read buffer
 num_samples = sampling_rate * duration_store_buffer
 
-chunk_size = 25000 # num_samples needs to be a multiple of chunk_size
+chunk_size = 5000 # num_samples needs to be a multiple of chunk_size
 num_chunks = int(num_samples / chunk_size)
 
 
@@ -98,7 +98,7 @@ spec_white_color = np.array([255, 255, 255]).reshape((1, 1, 3)),  # BGR order
 spec_black_color = np.array([0, 0, 0]).reshape((1, 1, 3)),  # BGR order
 spec_mic_diff_thresh = 450e-11
 n_channels = len(channels)-1
-spec_buffer_len = 10 # number of chunks - 10*25000 is 2 sec worth
+spec_buffer_len = 50 # number of chunks - 50*5000 is 2 sec worth
 mic_deque_1 = deque(maxlen=spec_buffer_len) # 2.5 seconds worth
 mic_deque_2 = deque(maxlen=spec_buffer_len) # 2.5 seconds worth
 mic_deque_3 = deque(maxlen=spec_buffer_len) # 2.5 seconds worth
@@ -328,6 +328,8 @@ def read_NIDAQ(shm_name, read_index, flag_end, path_name):
 
 
         task.timing.cfg_samp_clk_timing(sampling_rate, sample_mode=nidaqmx.constants.AcquisitionType.CONTINUOUS)
+
+        task.in_stream.input_buf_size = 10 * sampling_rate
 
         # Start the acquisition
         task.start()

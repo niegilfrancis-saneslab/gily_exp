@@ -85,7 +85,8 @@ path_C_ni =  "./data/channel/experiment_{}/".format(experiment_no)
 
 #---------------------------------------------------------------------------------pre run check (cameras) ------------------------------------------------------------
 # Creating a list for the camera names
-cam_names = ["center","gily_center","burrow_top","burrow_side","nest_top","nest_side","nest_other_side"]
+# cam_names = ["center","gily_center","burrow_top","burrow_side","nest_top","nest_side","nest_other_side"]
+cam_names = ["center","gily_center","burrow_top","nest_top","old_faulty","old_cen","nest_side"]
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Functions to sort file names correctly
