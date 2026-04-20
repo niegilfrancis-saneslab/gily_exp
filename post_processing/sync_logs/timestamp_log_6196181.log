@@ -1,0 +1,26 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu160
+Sun Apr  5 23:47:34 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 532
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 532
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:18, 18.75s/it]2it [00:38, 19.15s/it]3it [00:58, 19.72s/it]4it [01:20, 20.71s/it]5it [01:41, 20.84s/it]6it [02:02, 20.89s/it]7it [02:23, 20.77s/it]8it [02:31, 16.63s/it]8it [02:31, 18.90s/it]
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                                                          | 0/8 [00:00<?, ?it/s] 12%|██████████▎                                                                       | 1/8 [00:00<00:01,  6.57it/s] 25%|████████████████████▌                                                             | 2/8 [00:00<00:00,  6.47it/s] 38%|██████████████████████████████▊                                                   | 3/8 [00:00<00:00,  6.44it/s] 50%|█████████████████████████████████████████                                         | 4/8 [00:00<00:00,  6.73it/s] 62%|███████████████████████████████████████████████████▎                              | 5/8 [00:00<00:00,  6.93it/s] 75%|█████████████████████████████████████████████████████████████▌                    | 6/8 [00:00<00:00,  7.03it/s] 88%|███████████████████████████████████████████████████████████████████████▊          | 7/8 [00:01<00:00,  7.07it/s]100%|██████████████████████████████████████████████████████████████████████████████████| 8/8 [00:01<00:00,  7.27it/s]100%|██████████████████████████████████████████████████████████████████████████████████| 8/8 [00:01<00:00,  6.98it/s]
+Clock channel lengths
+[37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000]
+Traceback (most recent call last):
+  File "/mnt/home/njoseph/gily_exp/post_processing/timestamp_generation_gily_automated_flatiron.py", line 552, in <module>
+    process_experiments(exps)
+  File "/mnt/home/njoseph/gily_exp/post_processing/timestamp_generation_gily_automated_flatiron.py", line 131, in process_experiments
+    prev_sample = i[0]
+                  ~^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+Sun Apr  5 23:50:08 EDT 2026

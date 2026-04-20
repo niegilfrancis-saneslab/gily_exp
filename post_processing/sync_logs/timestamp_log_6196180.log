@@ -1,0 +1,75 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu160
+Sun Apr  5 23:46:33 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 531
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 531
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:21, 21.03s/it]2it [00:40, 20.04s/it]2it [00:40, 20.19s/it]
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                                                          | 0/2 [00:00<?, ?it/s] 50%|█████████████████████████████████████████                                         | 1/2 [00:00<00:00,  6.57it/s]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  6.64it/s]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  6.63it/s]
+Clock channel lengths
+[37500000, 37500000]
+Automatically detecting start and stop record positions
+  0%|                                                                                          | 0/2 [00:00<?, ?it/s] 50%|█████████████████████████████████████████                                         | 1/2 [00:01<00:01,  1.06s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.06s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.06s/it]
+Start record detected in file index: 0
+Stop record detected in file index: None
+Error in stop record index, defaulting to the file last index
+Getting the moving average of the first and last clock signal
+  0%|                                                                                          | 0/2 [00:00<?, ?it/s] 50%|█████████████████████████████████████████                                         | 1/2 [00:01<00:01,  1.05s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.05s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.05s/it]
+Getting the index for start record
+0it [00:00, ?it/s]7272it [00:00, 353278.19it/s]
+Difference:  -1.996584023756301
+Value:  -1.6734058528466118
+Set value of indices start
+Difference:  -1.3425121701112803
+Value:  -1.6728772965979244
+Set value of indices start
+Getting the index for stop record
+0it [00:00, ?it/s]7208it [00:00, 373204.41it/s]
+No stop index found, defaulting to the last rising edge in the file
+The indices are: [11457524 11461690]
+The indices are: [30036293]
+Start record sample index: 11457524
+Stop record sample index: 30036293
+Clock detection plot saved to: /mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_531/clock_start_stop_detection_exp_531.png
+  0%|                                                                                          | 0/7 [00:00<?, ?it/s][NULL @ 0x555558e5a8c0] Invalid NAL unit size (114578 > 97904).
+[NULL @ 0x555558e5a8c0] missing picture in access unit with size 97936
+[h264 @ 0x555558c2f380] Invalid NAL unit size (114578 > 97904).
+[h264 @ 0x555558c2f380] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558e59c00] stream 0, offset 0x1d905fb: partial file
+ 14%|███████████▏                                                                  | 1/7 [16:54<1:41:29, 1014.88s/it][NULL @ 0x555558d18180] Invalid NAL unit size (115619 > 32368).
+[NULL @ 0x555558d18180] missing picture in access unit with size 32400
+[h264 @ 0x555558d0f180] Invalid NAL unit size (115619 > 32368).
+[h264 @ 0x555558d0f180] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558d1b840] stream 0, offset 0x16c04e2: partial file
+ 29%|██████████████████████▌                                                        | 2/7 [33:15<1:22:52, 994.52s/it] 43%|██████████████████████████████████▋                                              | 3/7 [34:19<37:58, 569.67s/it][NULL @ 0x555561c6f880] Invalid NAL unit size (123558 > 65136).
+[NULL @ 0x555561c6f880] missing picture in access unit with size 65168
+[h264 @ 0x555558eac240] Invalid NAL unit size (123558 > 65136).
+[h264 @ 0x555558eac240] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558c4f240] stream 0, offset 0x8babd8: partial file
+ 57%|██████████████████████████████████████████████▎                                  | 4/7 [48:50<34:26, 688.70s/it][NULL @ 0x555558b8df80] Invalid NAL unit size (152082 > 65136).
+[NULL @ 0x555558b8df80] missing picture in access unit with size 65168
+[h264 @ 0x555559067f00] Invalid NAL unit size (152082 > 65136).
+[h264 @ 0x555559067f00] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558ef4980] stream 0, offset 0x20d1c8e: partial file
+ 71%|████████████████████████████████████████████████████████▍                      | 5/7 [1:04:38<26:04, 782.37s/it][NULL @ 0x555561c6f880] Invalid NAL unit size (115344 > 65136).
+[NULL @ 0x555561c6f880] missing picture in access unit with size 65168
+[h264 @ 0x555558ed26c0] Invalid NAL unit size (115344 > 65136).
+[h264 @ 0x555558ed26c0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f11500] stream 0, offset 0x1aff69a: partial file
+ 86%|███████████████████████████████████████████████████████████████████▋           | 6/7 [1:20:21<13:56, 836.94s/it][NULL @ 0x555561c6f380] Invalid NAL unit size (176134 > 65136).
+[NULL @ 0x555561c6f380] missing picture in access unit with size 65168
+[h264 @ 0x5555591b4500] Invalid NAL unit size (176134 > 65136).
+[h264 @ 0x5555591b4500] Error splitting the input into NAL units.
+100%|███████████████████████████████████████████████████████████████████████████████| 7/7 [1:38:04<00:00, 910.78s/it]100%|███████████████████████████████████████████████████████████████████████████████| 7/7 [1:38:04<00:00, 840.65s/it]
+Clock channel index :0 has 6251 number of rising edges
+Clock channel index :1 has 7209 number of rising edges
+Video data is longer by 1872864 frames
+Mon Apr  6 01:25:43 EDT 2026

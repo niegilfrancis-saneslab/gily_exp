@@ -1,0 +1,234 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu010
+Thu Apr  9 21:40:08 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 564
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 564
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:33, 33.71s/it]2it [01:08, 34.45s/it]3it [01:39, 32.87s/it]4it [02:11, 32.38s/it]5it [02:43, 32.22s/it]6it [03:14, 31.94s/it]7it [03:46, 31.86s/it]8it [04:19, 32.41s/it]9it [04:51, 32.13s/it]10it [05:24, 32.56s/it]11it [05:25, 22.63s/it]11it [05:25, 29.55s/it]
+Unable to synchronously open file (truncated file: eof = 2035672032, sblock->base_addr = 0, stored_eof = 2038472032)
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_564/nidaq_h5/channel_data_10.h5
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                   | 0/10 [00:00<?, ?it/s] 10%|████▎                                      | 1/10 [00:00<00:01,  6.31it/s] 20%|████████▌                                  | 2/10 [00:00<00:01,  6.16it/s] 30%|████████████▉                              | 3/10 [00:00<00:01,  4.65it/s] 40%|█████████████████▏                         | 4/10 [00:00<00:01,  5.26it/s] 50%|█████████████████████▌                     | 5/10 [00:00<00:00,  5.88it/s] 60%|█████████████████████████▊                 | 6/10 [00:01<00:00,  6.16it/s] 70%|██████████████████████████████             | 7/10 [00:01<00:00,  5.99it/s] 80%|██████████████████████████████████▍        | 8/10 [00:01<00:00,  6.20it/s] 90%|██████████████████████████████████████▋    | 9/10 [00:01<00:00,  6.65it/s]100%|██████████████████████████████████████████| 10/10 [00:01<00:00,  6.99it/s]100%|██████████████████████████████████████████| 10/10 [00:01<00:00,  6.20it/s]
+Clock channel lengths
+[37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000]
+Automatically detecting start and stop record positions
+  0%|                                                   | 0/10 [00:00<?, ?it/s] 10%|████▎                                      | 1/10 [00:00<00:08,  1.02it/s] 20%|████████▌                                  | 2/10 [00:01<00:07,  1.02it/s] 30%|████████████▉                              | 3/10 [00:02<00:06,  1.02it/s] 40%|█████████████████▏                         | 4/10 [00:03<00:05,  1.02it/s] 50%|█████████████████████▌                     | 5/10 [00:04<00:04,  1.02it/s] 60%|█████████████████████████▊                 | 6/10 [00:05<00:03,  1.02it/s] 70%|██████████████████████████████             | 7/10 [00:06<00:02,  1.02it/s] 80%|██████████████████████████████████▍        | 8/10 [00:07<00:01,  1.02it/s] 90%|██████████████████████████████████████▋    | 9/10 [00:08<00:00,  1.02it/s]100%|██████████████████████████████████████████| 10/10 [00:09<00:00,  1.02it/s]100%|██████████████████████████████████████████| 10/10 [00:09<00:00,  1.02it/s]
+Start record detected in file index: 0
+Stop record detected in file index: None
+Error in stop record index, defaulting to the file index 9
+Getting the moving average of the first and last clock signal
+  0%|                                                    | 0/2 [00:00<?, ?it/s] 50%|██████████████████████                      | 1/2 [00:00<00:00,  1.04it/s]100%|████████████████████████████████████████████| 2/2 [00:01<00:00,  1.04it/s]100%|████████████████████████████████████████████| 2/2 [00:01<00:00,  1.04it/s]
+Getting the index for start record
+0it [00:00, ?it/s]8999it [00:00, 341073.35it/s]
+Difference:  -1.7786472300411815
+Value:  -1.672615311320905
+Set value of indices start
+Difference:  -1.5605687705931386
+Value:  -1.6734323854121347
+Set value of indices start
+Getting the index for stop record
+0it [00:00, ?it/s]8999it [00:00, 350216.11it/s]
+No stop index found, defaulting to the last rising edge in the file
+The indices are: [935234 939400]
+The indices are: [37498929]
+Start record sample index: 935234
+Stop record sample index: 37498929
+Clock detection plot saved to: /mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_564/clock_start_stop_detection_exp_564.png
+  0%|                                                    | 0/7 [00:00<?, ?it/s][h264 @ 0x555558dd6680] sps_id 2 out of range
+[h264 @ 0x555558dd6680] slice type 32 too large at 127
+[h264 @ 0x555558dd6680] decode_slice_header error
+[NULL @ 0x555558deed40] Invalid NAL unit size (-1693699630 > 27913).
+[NULL @ 0x555558deed40] missing picture in access unit with size 27917
+[h264 @ 0x555558dbb900] Invalid NAL unit size (-1693699630 > 27913).
+[h264 @ 0x555558dbb900] Error splitting the input into NAL units.
+[NULL @ 0x555558f8dd80] Invalid NAL unit size (-1194601731 > 5759).
+[NULL @ 0x555558f8dd80] missing picture in access unit with size 5763
+[h264 @ 0x555558f48540] Invalid NAL unit size (-1194601731 > 5759).
+[h264 @ 0x555558f48540] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f8b7c0] stream 0, offset 0x20c41ce: partial file
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555559153900] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+ 14%|██████▎                                     | 1/7 [01:20<08:00, 80.13s/it][NULL @ 0x55555af59b40] Invalid NAL unit size (1423260854 > 24171).
+[NULL @ 0x55555af59b40] missing picture in access unit with size 24175
+[h264 @ 0x555558cf4980] Invalid NAL unit size (1423260854 > 24171).
+[h264 @ 0x555558cf4980] Error splitting the input into NAL units.
+[NULL @ 0x55555af59b40] Invalid NAL unit size (214016816 > 24677).
+[NULL @ 0x55555af59b40] missing picture in access unit with size 24681
+[h264 @ 0x55555958cdc0] Invalid NAL unit size (214016816 > 24677).
+[h264 @ 0x55555958cdc0] Error splitting the input into NAL units.
+[NULL @ 0x55555af59b40] Invalid NAL unit size (-1436402860 > 24504).
+[NULL @ 0x55555af59b40] missing picture in access unit with size 24508
+[h264 @ 0x555558c7c9c0] Invalid NAL unit size (-1436402860 > 24504).
+[h264 @ 0x555558c7c9c0] Error splitting the input into NAL units.
+[NULL @ 0x55555af59b40] Invalid NAL unit size (544361542 > 24828).
+[NULL @ 0x55555af59b40] missing picture in access unit with size 24832
+[h264 @ 0x555558f325c0] Invalid NAL unit size (544361542 > 24828).
+[h264 @ 0x555558f325c0] Error splitting the input into NAL units.
+[NULL @ 0x555558c245c0] Invalid NAL unit size (112797 > 76590).
+[NULL @ 0x555558c245c0] missing picture in access unit with size 76622
+[h264 @ 0x55555902f9c0] Invalid NAL unit size (112797 > 76590).
+[h264 @ 0x55555902f9c0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558c28100] stream 0, offset 0x1dcf724: partial file
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+ 29%|████████████▌                               | 2/7 [02:39<06:39, 79.96s/it][NULL @ 0x555558bd5bc0] Invalid NAL unit size (-503880460 > 34752).
+[NULL @ 0x555558bd5bc0] missing picture in access unit with size 34756
+[h264 @ 0x555558bb7180] left block unavailable for requested intra4x4 mode -1
+[h264 @ 0x555558bb7180] error while decoding MB 0 65, bytestream 9735
+[h264 @ 0x555558bb7180] sps_id 2 out of range
+[h264 @ 0x555558bb7180] slice type 32 too large at 127
+[h264 @ 0x555558bb7180] decode_slice_header error
+[h264 @ 0x555559029040] Invalid NAL unit size (-503880460 > 34752).
+[h264 @ 0x555559029040] Error splitting the input into NAL units.
+[NULL @ 0x555558bd5bc0] Invalid NAL unit size (1878214749 > 28592).
+[NULL @ 0x555558bd5bc0] missing picture in access unit with size 28596
+[h264 @ 0x555558be3380] Invalid NAL unit size (1878214749 > 28592).
+[h264 @ 0x555558be3380] Error splitting the input into NAL units.
+[NULL @ 0x555558bd5bc0] Invalid NAL unit size (1856323625 > 26504).
+[NULL @ 0x555558bd5bc0] missing picture in access unit with size 26508
+[h264 @ 0x55555bd91c00] Invalid NAL unit size (1856323625 > 26504).
+[h264 @ 0x55555bd91c00] Error splitting the input into NAL units.
+[NULL @ 0x555558bd5bc0] Invalid NAL unit size (1946694780 > 25200).
+[NULL @ 0x555558bd5bc0] missing picture in access unit with size 25204
+[h264 @ 0x555558bb7180] Invalid NAL unit size (1946694780 > 25200).
+[h264 @ 0x555558bb7180] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] trun track id unknown, no tfhd was found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] error reading header
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] trun track id unknown, no tfhd was found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] error reading header
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+ 43%|██████████████████▊                         | 3/7 [03:56<05:13, 78.29s/it][h264 @ 0x555558debd80] sps_id 2 out of range
+[h264 @ 0x555558debd80] slice type 32 too large at 127
+[h264 @ 0x555558debd80] decode_slice_header error
+[NULL @ 0x555558c2b980] Invalid NAL unit size (-670104503 > 18791).
+[NULL @ 0x555558c2b980] missing picture in access unit with size 18795
+[h264 @ 0x555558c1dc40] Invalid NAL unit size (-670104503 > 18791).
+[h264 @ 0x555558c1dc40] Error splitting the input into NAL units.
+[NULL @ 0x555558c2b980] Invalid NAL unit size (2106225797 > 18276).
+[NULL @ 0x555558c2b980] missing picture in access unit with size 18280
+[h264 @ 0x555558fcb5c0] Invalid NAL unit size (2106225797 > 18276).
+[h264 @ 0x555558fcb5c0] Error splitting the input into NAL units.
+[NULL @ 0x555558c2b980] Invalid NAL unit size (-641149781 > 18050).
+[NULL @ 0x555558c2b980] missing picture in access unit with size 18054
+[h264 @ 0x555558dad440] Invalid NAL unit size (-641149781 > 18050).
+[h264 @ 0x555558dad440] Error splitting the input into NAL units.
+[NULL @ 0x555558c2b980] Invalid NAL unit size (-2040883023 > 18265).
+[NULL @ 0x555558c2b980] missing picture in access unit with size 18269
+[h264 @ 0x555558debd80] Invalid NAL unit size (-2040883023 > 18265).
+[h264 @ 0x555558debd80] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+ 57%|█████████████████████████▏                  | 4/7 [05:12<03:52, 77.50s/it][NULL @ 0x55555d3bc840] Invalid NAL unit size (-157590181 > 25776).
+[NULL @ 0x55555d3bc840] missing picture in access unit with size 25780
+[h264 @ 0x555558c62100] Invalid NAL unit size (-157590181 > 25776).
+[h264 @ 0x555558c62100] Error splitting the input into NAL units.
+[NULL @ 0x55555d3bc840] Invalid NAL unit size (2000632650 > 26134).
+[NULL @ 0x55555d3bc840] missing picture in access unit with size 26138
+[h264 @ 0x555558d6d000] Invalid NAL unit size (2000632650 > 26134).
+[h264 @ 0x555558d6d000] Error splitting the input into NAL units.
+[NULL @ 0x55555d3bc840] Invalid NAL unit size (-114923500 > 25066).
+[NULL @ 0x55555d3bc840] missing picture in access unit with size 25070
+[h264 @ 0x555558ea1f40] Invalid NAL unit size (-114923500 > 25066).
+[h264 @ 0x555558ea1f40] Error splitting the input into NAL units.
+[NULL @ 0x55555d3bc840] Invalid NAL unit size (-292276856 > 25851).
+[NULL @ 0x55555d3bc840] missing picture in access unit with size 25855
+[h264 @ 0x555558f56540] Invalid NAL unit size (-292276856 > 25851).
+[h264 @ 0x555558f56540] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] trun track id unknown, no tfhd was found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] error reading header
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] trun track id unknown, no tfhd was found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] error reading header
+ 71%|███████████████████████████████▍            | 5/7 [06:32<02:36, 78.44s/it][h264 @ 0x555558baff00] sps_id 2 out of range
+[h264 @ 0x555558baff00] slice type 32 too large at 127
+[h264 @ 0x555558baff00] decode_slice_header error
+[NULL @ 0x555558e2cc00] Invalid NAL unit size (-318407228 > 25743).
+[NULL @ 0x555558e2cc00] missing picture in access unit with size 25747
+[h264 @ 0x555558f83580] Invalid NAL unit size (-318407228 > 25743).
+[h264 @ 0x555558f83580] Error splitting the input into NAL units.
+[NULL @ 0x555558e2cc00] Invalid NAL unit size (-739112147 > 25790).
+[NULL @ 0x555558e2cc00] missing picture in access unit with size 25794
+[h264 @ 0x555558e7af00] Invalid NAL unit size (-739112147 > 25790).
+[h264 @ 0x555558e7af00] Error splitting the input into NAL units.
+[NULL @ 0x555558e2cc00] Invalid NAL unit size (-1519475198 > 23893).
+[NULL @ 0x555558e2cc00] missing picture in access unit with size 23897
+[h264 @ 0x555559051040] Invalid NAL unit size (-1519475198 > 23893).
+[h264 @ 0x555559051040] Error splitting the input into NAL units.
+[NULL @ 0x555558e2cc00] Invalid NAL unit size (-265026389 > 23033).
+[NULL @ 0x555558e2cc00] missing picture in access unit with size 23037
+[h264 @ 0x555558baff00] Invalid NAL unit size (-265026389 > 23033).
+[h264 @ 0x555558baff00] Error splitting the input into NAL units.
+[NULL @ 0x555558c09240] Invalid NAL unit size (-1025757394 > 23690).
+[NULL @ 0x555558c09240] missing picture in access unit with size 23694
+[h264 @ 0x55555deb9340] Invalid NAL unit size (-1025757394 > 23690).
+[h264 @ 0x55555deb9340] Error splitting the input into NAL units.
+[NULL @ 0x555558c09240] Invalid NAL unit size (1174828346 > 20104).
+[NULL @ 0x555558c09240] missing picture in access unit with size 20108
+[h264 @ 0x555558bdfd00] Invalid NAL unit size (1174828346 > 20104).
+[h264 @ 0x555558bdfd00] Error splitting the input into NAL units.
+[NULL @ 0x555558c09240] Invalid NAL unit size (733774355 > 18786).
+[NULL @ 0x555558c09240] missing picture in access unit with size 18790
+[h264 @ 0x555558bd8f40] Invalid NAL unit size (733774355 > 18786).
+[h264 @ 0x555558bd8f40] Error splitting the input into NAL units.
+[NULL @ 0x555558c09240] Invalid NAL unit size (-1705703981 > 17836).
+[NULL @ 0x555558c09240] missing picture in access unit with size 17840
+[h264 @ 0x555558c09600] Invalid NAL unit size (-1705703981 > 17836).
+[h264 @ 0x555558c09600] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+ 86%|█████████████████████████████████████▋      | 6/7 [07:52<01:19, 79.03s/it][NULL @ 0x55555d9167c0] Invalid NAL unit size (2040989226 > 44966).
+[NULL @ 0x55555d9167c0] missing picture in access unit with size 44970
+[h264 @ 0x555558e0dfc0] left block unavailable for requested intra4x4 mode -1
+[h264 @ 0x555558e0dfc0] error while decoding MB 0 38, bytestream 5583
+[h264 @ 0x555558e0dfc0] sps_id 2 out of range
+[h264 @ 0x555558e0dfc0] slice type 32 too large at 127
+[h264 @ 0x555558e0dfc0] decode_slice_header error
+[h264 @ 0x555558d4de00] Invalid NAL unit size (2040989226 > 44966).
+[h264 @ 0x555558d4de00] Error splitting the input into NAL units.
+[NULL @ 0x55555d9167c0] Invalid NAL unit size (1255032122 > 44573).
+[NULL @ 0x55555d9167c0] missing picture in access unit with size 44577
+[h264 @ 0x555558efe180] Invalid NAL unit size (1255032122 > 44573).
+[h264 @ 0x555558efe180] Error splitting the input into NAL units.
+[NULL @ 0x55555d9167c0] Invalid NAL unit size (190782980 > 44483).
+[NULL @ 0x55555d9167c0] missing picture in access unit with size 44487
+[h264 @ 0x55555bd3a740] Invalid NAL unit size (190782980 > 44483).
+[h264 @ 0x55555bd3a740] Error splitting the input into NAL units.
+[NULL @ 0x55555d9167c0] Invalid NAL unit size (-659563562 > 43269).
+[NULL @ 0x55555d9167c0] missing picture in access unit with size 43273
+[h264 @ 0x555558e0dfc0] Invalid NAL unit size (-659563562 > 43269).
+[h264 @ 0x555558e0dfc0] Error splitting the input into NAL units.
+[NULL @ 0x555558dd6dc0] Invalid NAL unit size (196226117 > 15610).
+[NULL @ 0x555558dd6dc0] missing picture in access unit with size 15614
+[h264 @ 0x555558e0a400] Invalid NAL unit size (196226117 > 15610).
+[h264 @ 0x555558e0a400] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558db26c0] stream 0, offset 0x23b5880: partial file
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558dd8f00] moov atom not found
+100%|████████████████████████████████████████████| 7/7 [09:18<00:00, 81.20s/it]100%|████████████████████████████████████████████| 7/7 [09:18<00:00, 79.79s/it]
+Clock channel index :0 has 8776 number of rising edges
+Clock channel index :1 has 9000 number of rising edges
+Clock channel index :2 has 9000 number of rising edges
+Clock channel index :3 has 9000 number of rising edges
+Clock channel index :4 has 9000 number of rising edges
+Clock channel index :5 has 9000 number of rising edges
+Clock channel index :6 has 9001 number of rising edges
+Clock channel index :7 has 9000 number of rising edges
+Clock channel index :8 has 9000 number of rising edges
+Clock channel index :9 has 9000 number of rising edges
+Video data is longer by 19232 frames
+Thu Apr  9 21:55:30 EDT 2026

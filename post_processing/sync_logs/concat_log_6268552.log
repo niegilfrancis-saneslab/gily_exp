@@ -1,0 +1,201 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu182
+Mon Apr 20 03:00:56 PM EDT 2026
+Mon Apr 20 15:00:56 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.48.01              Driver Version: 590.48.01      CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    Off |   00000000:2A:00.0 Off |                    0 |
+| N/A   34C    P8             39W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Setting up environment
+
+ArgumentError: activate does not accept more than one argument:
+['565', '566', '567']
+
+
+Running concatenation
+======================================================== Working on experiment: 566 ========================================================
+Camera names: 
+ ['nest_side', 'burrow_top', 'center', 'burrow_side', 'nest_top', 'gily_center', 'nest_other_side']
+Working on camera: nest_side
+0it [00:00, ?it/s]======================================================== Working on experiment: 567 ========================================================
+Camera names: 
+ ['nest_side', 'burrow_top', 'center', 'burrow_side', 'nest_top', 'gily_center', 'nest_other_side']
+Working on camera: nest_side
+0it [00:00, ?it/s]1it [00:09,  9.97s/it]2it [00:28, 14.90s/it]1it [00:25, 25.74s/it]======================================================== Working on experiment: 565 ========================================================
+Camera names: 
+ ['nest_side', 'burrow_top', 'center', 'burrow_side', 'nest_top', 'gily_center', 'nest_other_side']
+Working on camera: nest_side
+0it [00:00, ?it/s]3it [00:42, 14.36s/it]4it [00:56, 14.50s/it]2it [01:00, 31.10s/it]1it [00:35, 35.03s/it]5it [01:11, 14.65s/it]6it [01:26, 14.58s/it]3it [01:36, 33.30s/it]2it [01:12, 36.33s/it]7it [01:42, 15.13s/it]8it [01:57, 15.09s/it]9it [02:12, 15.15s/it]3it [01:47, 35.94s/it]4it [02:15, 35.44s/it]10it [02:26, 14.81s/it]11it [02:41, 14.93s/it]4it [02:22, 35.29s/it]5it [02:49, 35.16s/it]12it [02:53, 14.01s/it]12it [02:53, 14.48s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T131557-132058_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T132058-132559_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T132559-133100_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T132559-133100_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T133100-133601_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T133601-134102_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T133601-134102_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T134102-134603_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T134603-135104_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T135104-135605_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T135104-135605_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T135605-140106_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T140106-140607_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T140106-140607_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T140607-141108_trunc_111.mp4 created successfully.
+cannot convert float NaN to integer
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T141108-141510_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_side-20260311T141108-141510_trunc_111.mp4 created successfully.
+Working on camera: burrow_top
+0it [00:00, ?it/s]1it [00:15, 15.17s/it]2it [00:29, 14.59s/it]5it [02:54, 34.16s/it]6it [03:24, 34.89s/it]3it [00:43, 14.35s/it]4it [00:58, 14.53s/it]6it [03:25, 33.19s/it]7it [03:56, 34.08s/it]5it [01:13, 14.85s/it]6it [01:28, 14.96s/it]7it [03:54, 31.77s/it]8it [04:29, 33.70s/it]7it [01:41, 14.36s/it]8it [04:24, 31.36s/it]8it [02:00, 15.56s/it]9it [05:01, 33.13s/it]9it [02:15, 15.53s/it]9it [04:56, 31.46s/it]10it [02:34, 16.63s/it]10it [05:35, 33.44s/it]11it [02:48, 15.92s/it]10it [05:25, 30.78s/it]12it [03:02, 15.21s/it]12it [03:02, 15.21s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T131557-132058_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T132058-132559_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T132559-133100_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T132559-133100_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T133100-133600_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T133600-134101_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T133600-134101_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T134101-134602_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T134602-135103_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T135103-135604_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T135103-135604_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T135604-140104_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T140104-140605_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T140104-140605_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T140605-141105_trunc_111.mp4 created successfully.
+cannot convert float NaN to integer
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T141105-141510_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_top-20260311T141105-141510_trunc_111.mp4 created successfully.
+Working on camera: center
+0it [00:00, ?it/s]1it [00:12, 12.89s/it]11it [06:09, 33.64s/it]2it [00:25, 12.69s/it]11it [05:58, 31.47s/it]3it [00:39, 13.48s/it]12it [06:42, 33.37s/it]4it [00:52, 13.31s/it]12it [06:31, 31.73s/it]5it [01:07, 13.65s/it]6it [01:20, 13.63s/it]13it [07:14, 33.00s/it]7it [01:33, 13.41s/it]13it [07:03, 32.01s/it]8it [01:47, 13.49s/it]14it [07:43, 31.80s/it]9it [01:59, 13.19s/it]14it [07:38, 32.96s/it]10it [02:14, 13.60s/it]15it [08:18, 32.68s/it]11it [02:27, 13.38s/it]12it [02:38, 12.67s/it]12it [02:38, 13.20s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T131557-132058_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T132058-132559_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T132559-133100_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T132559-133100_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T133100-133601_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T133601-134102_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T133601-134102_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T134102-134603_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T134603-135104_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T135104-135605_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T135104-135605_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T135605-140106_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T140106-140607_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T140106-140607_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T140607-141108_trunc_111.mp4 created successfully.
+cannot convert float NaN to integer
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T141108-141510_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/center-20260311T141108-141510_trunc_111.mp4 created successfully.
+Working on camera: burrow_side
+0it [00:00, ?it/s]15it [08:13, 33.38s/it]16it [08:55, 33.95s/it]1it [00:37, 37.98s/it]16it [08:50, 34.45s/it]17it [09:36, 36.02s/it]2it [01:14, 37.08s/it]17it [09:26, 35.11s/it]18it [10:14, 36.73s/it]3it [01:53, 38.13s/it]18it [10:04, 35.73s/it]19it [10:52, 37.26s/it]4it [02:33, 38.90s/it]19it [10:39, 35.77s/it]20it [11:28, 36.63s/it]5it [03:13, 39.11s/it]20it [11:21, 37.38s/it]21it [12:04, 36.60s/it]6it [03:51, 38.77s/it]21it [12:00, 37.97s/it]22it [12:42, 37.11s/it]7it [04:30, 38.90s/it]22it [12:38, 38.16s/it]23it [13:21, 37.48s/it]8it [05:10, 39.32s/it]23it [13:16, 38.08s/it]24it [13:59, 37.62s/it]9it [05:48, 38.76s/it]24it [13:55, 38.32s/it]25it [14:33, 36.68s/it]10it [06:27, 38.75s/it]25it [14:34, 38.37s/it]26it [15:10, 36.80s/it]11it [07:08, 39.53s/it]26it [15:14, 38.86s/it]27it [15:48, 36.99s/it]12it [07:38, 36.54s/it]12it [07:38, 38.18s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T131557-132058_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T132058-132558_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T132058-132558_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T132558-133059_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T132558-133059_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T133059-133600_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T133059-133600_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T133600-134101_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T133600-134101_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T134101-134602_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T134101-134602_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T134602-135102_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T135102-135603_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T135603-140103_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T140103-140604_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T140604-141105_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/burrow_side-20260311T140604-141105_trunc_111.mp4 created successfully.
+Working on camera: nest_top
+0it [00:00, ?it/s]27it [15:51, 38.39s/it]28it [16:22, 36.32s/it]1it [00:14, 14.07s/it]2it [00:29, 14.92s/it]28it [16:27, 37.55s/it]3it [00:44, 15.05s/it]29it [16:58, 36.02s/it]4it [00:58, 14.68s/it]5it [01:14, 15.12s/it]29it [17:01, 36.46s/it]30it [17:31, 35.09s/it]6it [01:27, 14.20s/it]7it [01:41, 14.25s/it]31it [17:55, 31.73s/it]31it [17:55, 34.68s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T141942-142442_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T142442-142942_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T142442-142942_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T142942-143442_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T142942-143442_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T143442-143944_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T143442-143944_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T143943-144444_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T143943-144444_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T144444-144945_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T144444-144945_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T144945-145446_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T145446-145946_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T145446-145946_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T145946-150447_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T145946-150447_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T150447-150948_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T150447-150948_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T150948-151449_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T150948-151449_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T151448-151950_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T151448-151950_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T151950-152451_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T152451-152951_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T152451-152951_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T152951-153452_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T152951-153452_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T153451-153952_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T153451-153952_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T153952-154453_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T153952-154453_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T154453-154954_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T154453-154954_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T154953-155454_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T155454-155955_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T155454-155955_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T155954-160456_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T155954-160456_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T160456-160956_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T160456-160956_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T160956-161457_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T160956-161457_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T161457-161958_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T161457-161958_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T161958-162459_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T162459-163000_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T162459-163000_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T163000-163501_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T163000-163501_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T163501-164001_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T163501-164001_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T164001-164502_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T164001-164502_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T164501-165002_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T164501-165002_trunc_1.mp4 created successfully.
+Index from timestamp not found
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_567/videos/nest_side-20260311T164501-165002_trunc_1.mp4 created successfully.
+Working on camera: burrow_top
+0it [00:00, ?it/s]30it [17:38, 36.69s/it]8it [01:56, 14.32s/it]9it [02:10, 14.29s/it]1it [00:33, 33.98s/it]10it [02:25, 14.52s/it]31it [18:12, 35.98s/it]11it [02:39, 14.55s/it]12it [02:52, 14.02s/it]12it [02:52, 14.40s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T131557-132058_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T132058-132559_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T132559-133100_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T132559-133100_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T133100-133601_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T133601-134102_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T133601-134102_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T134102-134603_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T134603-135104_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T135104-135605_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T135104-135605_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T135605-140106_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T140106-140607_trunc_0.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T140106-140607_trunc_1.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T140607-141108_trunc_111.mp4 created successfully.
+cannot convert float NaN to integer
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T141108-141510_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/videos/nest_top-20260311T141108-141510_trunc_111.mp4 created successfully.
+Working on camera: gily_center
+0it [00:00, ?it/s]2it [01:08, 34.08s/it]32it [18:47, 35.79s/it]1it [00:37, 37.48s/it]3it [01:47, 36.27s/it]33it [19:28, 37.16s/it]2it [01:16, 38.63s/it]4it [02:25, 37.04s/it]34it [20:05, 37.25s/it]5it [03:02, 37.03s/it]3it [01:56, 39.25s/it]35it [20:45, 37.92s/it]6it [03:39, 37.13s/it]4it [02:35, 38.89s/it]36it [21:21, 37.46s/it]7it [04:16, 37.12s/it]5it [03:13, 38.53s/it]37it [21:56, 36.66s/it]8it [04:54, 37.28s/it]6it [03:50, 38.12s/it]38it [22:33, 36.67s/it]9it [05:30, 36.98s/it]7it [04:25, 37.25s/it]

@@ -1,0 +1,96 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu010
+Thu Apr  9 21:40:11 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 566
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 566
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:32, 32.95s/it]2it [01:06, 33.37s/it]3it [01:36, 31.83s/it]4it [02:06, 31.25s/it]5it [02:39, 31.86s/it]6it [03:14, 32.71s/it]7it [03:49, 33.64s/it]8it [04:20, 32.71s/it]9it [04:52, 32.52s/it]10it [05:24, 32.25s/it]11it [05:54, 31.61s/it]12it [06:25, 31.49s/it]13it [06:43, 27.46s/it]13it [06:43, 31.07s/it]
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                   | 0/13 [00:00<?, ?it/s]  8%|███▎                                       | 1/13 [00:00<00:02,  5.76it/s] 15%|██████▌                                    | 2/13 [00:00<00:01,  5.97it/s] 23%|█████████▉                                 | 3/13 [00:00<00:01,  5.93it/s] 31%|█████████████▏                             | 4/13 [00:00<00:01,  6.21it/s] 38%|████████████████▌                          | 5/13 [00:00<00:01,  6.12it/s] 46%|███████████████████▊                       | 6/13 [00:00<00:01,  5.96it/s] 54%|███████████████████████▏                   | 7/13 [00:01<00:00,  6.21it/s] 62%|██████████████████████████▍                | 8/13 [00:01<00:00,  6.37it/s] 69%|█████████████████████████████▊             | 9/13 [00:01<00:00,  6.04it/s] 77%|████████████████████████████████▎         | 10/13 [00:01<00:00,  6.43it/s] 85%|███████████████████████████████████▌      | 11/13 [00:01<00:00,  6.72it/s] 92%|██████████████████████████████████████▊   | 12/13 [00:01<00:00,  6.94it/s]100%|██████████████████████████████████████████| 13/13 [00:02<00:00,  7.12it/s]100%|██████████████████████████████████████████| 13/13 [00:02<00:00,  6.46it/s]
+Clock channel lengths
+[37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000, 37500000]
+Automatically detecting start and stop record positions
+  0%|                                                   | 0/13 [00:00<?, ?it/s]  8%|███▎                                       | 1/13 [00:00<00:11,  1.02it/s] 15%|██████▌                                    | 2/13 [00:01<00:10,  1.01it/s] 23%|█████████▉                                 | 3/13 [00:02<00:09,  1.01it/s] 31%|█████████████▏                             | 4/13 [00:03<00:08,  1.01it/s] 38%|████████████████▌                          | 5/13 [00:04<00:07,  1.01it/s] 46%|███████████████████▊                       | 6/13 [00:05<00:06,  1.01it/s] 54%|███████████████████████▏                   | 7/13 [00:06<00:05,  1.01it/s] 62%|██████████████████████████▍                | 8/13 [00:07<00:04,  1.01it/s] 69%|█████████████████████████████▊             | 9/13 [00:08<00:03,  1.01it/s] 77%|████████████████████████████████▎         | 10/13 [00:09<00:02,  1.02it/s] 85%|███████████████████████████████████▌      | 11/13 [00:10<00:01,  1.02it/s] 92%|██████████████████████████████████████▊   | 12/13 [00:11<00:00,  1.03it/s]100%|██████████████████████████████████████████| 13/13 [00:12<00:00,  1.04it/s]100%|██████████████████████████████████████████| 13/13 [00:12<00:00,  1.02it/s]
+Start record detected in file index: 0
+Stop record detected in file index: 12
+Getting the moving average of the first and last clock signal
+  0%|                                                    | 0/2 [00:00<?, ?it/s] 50%|██████████████████████                      | 1/2 [00:00<00:00,  1.07it/s]100%|████████████████████████████████████████████| 2/2 [00:01<00:00,  1.07it/s]100%|████████████████████████████████████████████| 2/2 [00:01<00:00,  1.07it/s]
+Getting the index for start record
+0it [00:00, ?it/s]5402it [00:00, 329810.19it/s]
+Difference:  -1.6654783661870274
+Value:  1.6663703057723611
+Difference:  -1.6654900868123275
+Value:  1.6664513978486557
+Difference:  -1.6663388065918672
+Value:  1.6664312163969672
+Difference:  -1.6991325667770907
+Value:  -1.6733759066489702
+Set value of indices start
+Difference:  -1.6389767870671808
+Value:  -1.6725618359679737
+Set value of indices start
+Getting the index for stop record
+0it [00:00, ?it/s]4061it [00:00, 343436.34it/s]
+The indices are: [22199899 22204066]
+The indices are: [16442268]
+Start record sample index: 22199899
+Stop record sample index: 16442268
+Clock detection plot saved to: /mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_566/clock_start_stop_detection_exp_566.png
+  0%|                                                    | 0/7 [00:00<?, ?it/s][NULL @ 0x5555590d7740] Invalid NAL unit size (114722 > 65136).
+[NULL @ 0x5555590d7740] missing picture in access unit with size 65168
+[h264 @ 0x555558e835c0] Invalid NAL unit size (114722 > 65136).
+[h264 @ 0x555558e835c0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558b93a80] stream 0, offset 0xbe86762: partial file
+ 14%|██████▎                                     | 1/7 [01:08<06:49, 68.20s/it][NULL @ 0x555558d1ef00] Invalid NAL unit size (114672 > 65256).
+[NULL @ 0x555558d1ef00] missing picture in access unit with size 65288
+[h264 @ 0x555558eca680] Invalid NAL unit size (114672 > 65256).
+[h264 @ 0x555558eca680] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558e5dbc0] stream 0, offset 0x21849c2: partial file
+ 29%|████████████▎                              | 2/7 [03:41<09:50, 118.08s/it][NULL @ 0x555558ef6e00] Invalid NAL unit size (135705 > 65256).
+[NULL @ 0x555558ef6e00] missing picture in access unit with size 65288
+[h264 @ 0x555558f34ac0] Invalid NAL unit size (135705 > 65256).
+[h264 @ 0x555558f34ac0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558d95c80] stream 0, offset 0x2721eac: partial file
+ 43%|██████████████████▍                        | 3/7 [05:57<08:25, 126.26s/it][NULL @ 0x555558f75b00] Invalid NAL unit size (127549 > 65136).
+[NULL @ 0x555558f75b00] missing picture in access unit with size 65168
+[h264 @ 0x555558f2dfc0] Invalid NAL unit size (127549 > 65136).
+[h264 @ 0x555558f2dfc0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558d74800] stream 0, offset 0x9a2398b: partial file
+ 57%|████████████████████████▌                  | 4/7 [07:15<05:22, 107.34s/it][NULL @ 0x555558c26fc0] Invalid NAL unit size (140608 > 65256).
+[NULL @ 0x555558c26fc0] missing picture in access unit with size 65288
+[h264 @ 0x555558f4cd00] Invalid NAL unit size (140608 > 65256).
+[h264 @ 0x555558f4cd00] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558d7dec0] stream 0, offset 0x28066b6: partial file
+ 71%|██████████████████████████████▋            | 5/7 [09:35<03:58, 119.03s/it][NULL @ 0x555558c2b440] Invalid NAL unit size (110176 > 65256).
+[NULL @ 0x555558c2b440] missing picture in access unit with size 65288
+[h264 @ 0x555558f116c0] Invalid NAL unit size (110176 > 65256).
+[h264 @ 0x555558f116c0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558bab980] stream 0, offset 0x1ff683f: partial file
+ 86%|████████████████████████████████████▊      | 6/7 [11:58<02:07, 127.26s/it][NULL @ 0x555558f76880] Invalid NAL unit size (170794 > 65256).
+[NULL @ 0x555558f76880] missing picture in access unit with size 65288
+[h264 @ 0x555558e26e00] Invalid NAL unit size (170794 > 65256).
+[h264 @ 0x555558e26e00] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558cd1800] stream 0, offset 0x2db5afb: partial file
+100%|███████████████████████████████████████████| 7/7 [14:29<00:00, 135.14s/it]100%|███████████████████████████████████████████| 7/7 [14:29<00:00, 124.27s/it]
+Clock channel index :0 has 3673 number of rising edges
+Clock channel index :1 has 9000 number of rising edges
+Clock channel index :2 has 9000 number of rising edges
+Clock channel index :3 has 9000 number of rising edges
+Clock channel index :4 has 9000 number of rising edges
+Clock channel index :5 has 9000 number of rising edges
+Clock channel index :6 has 9000 number of rising edges
+Clock channel index :7 has 9000 number of rising edges
+Clock channel index :8 has 9000 number of rising edges
+Clock channel index :9 has 9000 number of rising edges
+Clock channel index :10 has 9000 number of rising edges
+Clock channel index :11 has 9000 number of rising edges
+Clock channel index :12 has 3947 number of rising edges
+NIDAQ data is longer by 30 samples
+Thu Apr  9 22:02:03 EDT 2026

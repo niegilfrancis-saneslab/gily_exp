@@ -1,0 +1,48 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu052
+Sun Apr  5 22:37:21 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 524
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 524
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:14, 14.32s/it]1it [00:14, 14.32s/it]
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                                                    | 0/1 [00:00<?, ?it/s]100%|████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  7.89it/s]100%|████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  7.87it/s]
+Clock channel lengths
+[37500000]
+Automatically detecting start and stop record positions
+  0%|                                                                                    | 0/1 [00:00<?, ?it/s]100%|████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.04it/s]100%|████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.04it/s]
+Start record detected in file index: 0
+Stop record detected in file index: 0
+Getting the moving average of the first and last clock signal
+  0%|                                                                                    | 0/2 [00:00<?, ?it/s] 50%|██████████████████████████████████████                                      | 1/2 [00:00<00:00,  1.05it/s]100%|████████████████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.05it/s]100%|████████████████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.05it/s]
+Getting the index for start record
+0it [00:00, ?it/s]4824it [00:00, 330593.64it/s]
+Difference:  -1.4140150314675348
+Value:  -1.6727043001684958
+Set value of indices start
+Difference:  -1.9253867630539636
+Value:  -1.6733644350869576
+Set value of indices start
+Difference:  -3.1957709815601745
+Value:  -1.6734084313841777
+Set value of indices start
+Difference:  -1.6664443508226943
+Set value of indices start
+Getting the index for stop record
+0it [00:00, ?it/s]4824it [00:00, 355719.45it/s]
+The indices are: [ 1985423  1989589 19581134 20141145]
+The indices are: [    2103 11356191 20141145]
+Start record sample index: 1985423
+Stop record sample index: 2103
+Clock detection plot saved to: /mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_524/clock_start_stop_detection_exp_524.png
+  0%|                                                                                    | 0/6 [00:00<?, ?it/s] 17%|████████████▋                                                               | 1/6 [00:12<01:01, 12.31s/it] 33%|█████████████████████████▎                                                  | 2/6 [00:25<00:50, 12.56s/it] 50%|██████████████████████████████████████                                      | 3/6 [00:36<00:35, 11.98s/it] 67%|██████████████████████████████████████████████████▋                         | 4/6 [00:48<00:24, 12.13s/it] 83%|███████████████████████████████████████████████████████████████▎            | 5/6 [01:02<00:12, 12.80s/it]100%|████████████████████████████████████████████████████████████████████████████| 6/6 [01:16<00:00, 13.28s/it]100%|████████████████████████████████████████████████████████████████████████████| 6/6 [01:16<00:00, 12.82s/it]
+Clock channel index :0 has 0 number of rising edges
+Video data is longer by 4199 frames
+Sun Apr  5 22:39:20 EDT 2026

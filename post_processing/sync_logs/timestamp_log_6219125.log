@@ -1,0 +1,25 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu007
+Thu Apr  9 21:36:54 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 551
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 551
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:28, 28.92s/it]2it [00:57, 28.65s/it]3it [01:24, 27.82s/it]4it [01:40, 23.23s/it]4it [01:40, 25.10s/it]
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                    | 0/4 [00:00<?, ?it/s] 25%|███████████                                 | 1/4 [00:00<00:00,  7.77it/s] 50%|██████████████████████                      | 2/4 [00:00<00:00,  7.90it/s] 75%|█████████████████████████████████           | 3/4 [00:00<00:00,  7.99it/s]100%|████████████████████████████████████████████| 4/4 [00:00<00:00,  8.04it/s]100%|████████████████████████████████████████████| 4/4 [00:00<00:00,  7.99it/s]
+Clock channel lengths
+[37500000, 37500000, 37500000, 37500000]
+Automatically detecting start and stop record positions
+  0%|                                                    | 0/4 [00:00<?, ?it/s] 25%|███████████                                 | 1/4 [00:00<00:02,  1.04it/s] 50%|██████████████████████                      | 2/4 [00:01<00:01,  1.04it/s] 75%|█████████████████████████████████           | 3/4 [00:02<00:00,  1.04it/s]100%|████████████████████████████████████████████| 4/4 [00:03<00:00,  1.06it/s]100%|████████████████████████████████████████████| 4/4 [00:03<00:00,  1.05it/s]
+Start record detected in file index: None
+Stop record detected in file index: None
+No start record found
+Skipping experiment 551
+Thu Apr  9 21:38:56 EDT 2026

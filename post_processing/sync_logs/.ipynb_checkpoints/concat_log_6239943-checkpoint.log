@@ -1,0 +1,47 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu177
+Mon Apr 13 02:30:09 PM EDT 2026
+Mon Apr 13 14:30:09 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.48.01              Driver Version: 590.48.01      CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    Off |   00000000:A7:00.0 Off |                    0 |
+| N/A   31C    P8             33W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Setting up environment
+
+ArgumentError: activate does not accept more than one argument:
+['537', '538', '539', '540', '541', '542']
+
+
+Running concatenation
+======================================================== Working on experiment: 540 ========================================================
+Camera names: 
+ ['center', 'burrow_top', 'nest_top', 'burrow_side', 'nest_side', 'gily_center', 'nest_other_side']
+Working on camera: center
+0it [00:00, ?it/s]======================================================== Working on experiment: 537 ========================================================
+No timetsamp file found for experiment 537, skipping it
+======================================================== Working on experiment: 541 ========================================================
+Camera names: 
+ ['center', 'burrow_top', 'nest_top', 'burrow_side', 'nest_side', 'gily_center', 'nest_other_side']
+Working on camera: center
+0it [00:00, ?it/s]1it [00:30, 30.14s/it]1it [00:32, 32.34s/it]2it [00:57, 27.93s/it]2it [00:57, 28.60s/it]
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_540/videos/center-20260304T103306-103807_trunc_111.mp4 created successfully.
+cannot convert float NaN to integer
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_540/videos/center-20260304T103807-104051_trunc_111.mp4 created successfully.
+/mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_540/videos/center-20260304T103807-104051_trunc_111.mp4 created successfully.
+Working on camera: burrow_top
+0it [00:00, ?it/s]

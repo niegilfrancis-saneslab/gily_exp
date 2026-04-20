@@ -128,7 +128,13 @@ def process_experiments(exps):
 
         temp_r_0 = []
         for i in indices_r:
-            prev_sample = i[0]
+            try:
+                prev_sample = i[0]
+            except Exception as e:
+                print(e)
+                print("No indices found in one of the clk channels")
+                temp_r_0.append([])
+                continue   
             temp_r_1 = []
             temp_r_1.append(i[0])
             for j in i[1:]:
@@ -189,13 +195,16 @@ def process_experiments(exps):
         print(f"Stop record detected in file index: {stop_record_file_no}")
 
         if (start_record_file_no is None):
+            print("No start record found")
             print(f"Skipping experiment {experiment_no}")
             continue
 
 
         if stop_record_file_no is None:
             stop_record_file_no = experiment_len-1
-            print("Error in stop record index, defaulting to the file last index")
+            while len(indices_r[stop_record_file_no]) == 0:
+                stop_record_file_no-=1
+            print(f"Error in stop record index, defaulting to the file index {stop_record_file_no}")
         elif stop_record_file_no < start_record_file_no:
                 stop_record_file_no = experiment_len-1
                 start_record_file_no = 0

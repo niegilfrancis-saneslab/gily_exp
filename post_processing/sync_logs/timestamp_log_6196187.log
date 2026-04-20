@@ -1,0 +1,21 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu161
+Sun Apr  5 23:47:34 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 538
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 538
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]0it [00:00, ?it/s]
+Traceback (most recent call last):
+  File "/mnt/home/njoseph/gily_exp/post_processing/timestamp_generation_gily_automated_flatiron.py", line 552, in <module>
+    process_experiments(exps)
+  File "/mnt/home/njoseph/gily_exp/post_processing/timestamp_generation_gily_automated_flatiron.py", line 83, in process_experiments
+    clk_channel = max(channels)
+                  ^^^^^^^^^^^^^
+ValueError: max() arg is an empty sequence
+Sun Apr  5 23:47:46 EDT 2026

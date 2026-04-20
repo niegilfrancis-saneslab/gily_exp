@@ -1,0 +1,78 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu009
+Thu Apr  9 21:37:12 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 562
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 562
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:30, 30.35s/it]2it [01:00, 30.25s/it]3it [01:30, 30.32s/it]4it [01:58, 29.27s/it]5it [02:13, 24.04s/it]5it [02:13, 26.67s/it]
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                    | 0/5 [00:00<?, ?it/s] 20%|████████▊                                   | 1/5 [00:00<00:00,  6.98it/s] 40%|█████████████████▌                          | 2/5 [00:00<00:00,  6.99it/s] 60%|██████████████████████████▍                 | 3/5 [00:00<00:00,  7.32it/s] 80%|███████████████████████████████████▏        | 4/5 [00:00<00:00,  7.59it/s]100%|████████████████████████████████████████████| 5/5 [00:00<00:00,  7.75it/s]100%|████████████████████████████████████████████| 5/5 [00:00<00:00,  7.53it/s]
+Clock channel lengths
+[37500000, 37500000, 37500000, 37500000, 37500000]
+Automatically detecting start and stop record positions
+  0%|                                                    | 0/5 [00:00<?, ?it/s] 20%|████████▊                                   | 1/5 [00:00<00:03,  1.05it/s] 40%|█████████████████▌                          | 2/5 [00:01<00:02,  1.04it/s] 60%|██████████████████████████▍                 | 3/5 [00:02<00:01,  1.03it/s] 80%|███████████████████████████████████▏        | 4/5 [00:03<00:00,  1.03it/s]100%|████████████████████████████████████████████| 5/5 [00:04<00:00,  1.04it/s]100%|████████████████████████████████████████████| 5/5 [00:04<00:00,  1.04it/s]
+Start record detected in file index: 0
+Stop record detected in file index: 4
+Getting the moving average of the first and last clock signal
+  0%|                                                    | 0/2 [00:00<?, ?it/s] 50%|██████████████████████                      | 1/2 [00:00<00:00,  1.06it/s]100%|████████████████████████████████████████████| 2/2 [00:01<00:00,  1.07it/s]100%|████████████████████████████████████████████| 2/2 [00:01<00:00,  1.07it/s]
+Getting the index for start record
+0it [00:00, ?it/s]8463it [00:00, 337479.15it/s]
+Difference:  -1.990202172581988
+Value:  -1.6726086818422197
+Set value of indices start
+Difference:  -1.348142765830814
+Value:  -1.67261589735217
+Set value of indices start
+Getting the index for stop record
+0it [00:00, ?it/s]3616it [00:00, 346024.58it/s]
+The indices are: [7625406 7629573]
+The indices are: [14370008]
+Start record sample index: 7625406
+Stop record sample index: 14370008
+Clock detection plot saved to: /mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_562/clock_start_stop_detection_exp_562.png
+  0%|                                                    | 0/7 [00:00<?, ?it/s][NULL @ 0x555558d03140] Invalid NAL unit size (116778 > 65136).
+[NULL @ 0x555558d03140] missing picture in access unit with size 65168
+[h264 @ 0x555558cdca00] Invalid NAL unit size (116778 > 65136).
+[h264 @ 0x555558cdca00] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558e1b480] stream 0, offset 0x29581bb: partial file
+ 14%|██████▎                                     | 1/7 [00:21<02:10, 21.73s/it][NULL @ 0x555558c34440] Invalid NAL unit size (114272 > 65136).
+[NULL @ 0x555558c34440] missing picture in access unit with size 65168
+[h264 @ 0x555558c76400] Invalid NAL unit size (114272 > 65136).
+[h264 @ 0x555558c76400] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558c30d40] stream 0, offset 0x25d4c9f: partial file
+ 29%|████████████▌                               | 2/7 [00:42<01:46, 21.40s/it][NULL @ 0x555558cdfa80] Invalid NAL unit size (145795 > 65136).
+[NULL @ 0x555558cdfa80] missing picture in access unit with size 65168
+[h264 @ 0x555558f318c0] Invalid NAL unit size (145795 > 65136).
+[h264 @ 0x555558f318c0] Error splitting the input into NAL units.
+ 43%|██████████████████▊                         | 3/7 [01:03<01:25, 21.25s/it][NULL @ 0x555558bae940] Invalid NAL unit size (130582 > 32368).
+[NULL @ 0x555558bae940] missing picture in access unit with size 32400
+[h264 @ 0x555558c91ac0] Invalid NAL unit size (130582 > 32368).
+[h264 @ 0x555558c91ac0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558baf940] stream 0, offset 0x21178bd: partial file
+ 57%|█████████████████████████▏                  | 4/7 [01:26<01:04, 21.58s/it][NULL @ 0x555558d1ac80] Invalid NAL unit size (147189 > 65136).
+[NULL @ 0x555558d1ac80] missing picture in access unit with size 65168
+[h264 @ 0x555558d28800] Invalid NAL unit size (147189 > 65136).
+[h264 @ 0x555558d28800] Error splitting the input into NAL units.
+ 71%|███████████████████████████████▍            | 5/7 [01:49<00:44, 22.15s/it][NULL @ 0x55555905f340] Invalid NAL unit size (117637 > 32368).
+[NULL @ 0x55555905f340] missing picture in access unit with size 32400
+[h264 @ 0x555559058580] Invalid NAL unit size (117637 > 32368).
+[h264 @ 0x555559058580] Error splitting the input into NAL units.
+ 86%|█████████████████████████████████████▋      | 6/7 [02:14<00:23, 23.07s/it][NULL @ 0x555558da3580] Invalid NAL unit size (166245 > 65136).
+[NULL @ 0x555558da3580] missing picture in access unit with size 65168
+[h264 @ 0x555558be7fc0] Invalid NAL unit size (166245 > 65136).
+[h264 @ 0x555558be7fc0] Error splitting the input into NAL units.
+100%|████████████████████████████████████████████| 7/7 [02:39<00:00, 23.70s/it]100%|████████████████████████████████████████████| 7/7 [02:39<00:00, 22.73s/it]
+Clock channel index :0 has 7170 number of rising edges
+Clock channel index :1 has 9001 number of rising edges
+Clock channel index :2 has 9000 number of rising edges
+Clock channel index :3 has 9000 number of rising edges
+Clock channel index :4 has 3449 number of rising edges
+NIDAQ data is longer by 30 samples
+Thu Apr  9 21:42:32 EDT 2026

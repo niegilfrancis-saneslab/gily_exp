@@ -108,7 +108,14 @@ def process_experiment(experiment_no):
             #     print(f"Skipping experiment {experiment_no}")
             #     continue
 
+        # Deleting the trunc files if it is already present
+        trunc_files = glob.glob(nidaq_folder+"*_trunc*")
+        for i in trunc_files:
+            os.remove(i) 
 
+        trunc_files = glob.glob(video_folder+"*_trunc*")
+        for i in trunc_files:
+            os.remove(i) 
 
         # Automatically find the number of channels
         all_nidaq_files = glob.glob(nidaq_folder + "acquisition_data_*_*.wav")
@@ -121,14 +128,7 @@ def process_experiment(experiment_no):
 
         no_channels = max(channels) + 1
 
-        # Deleting the trunc files if it is already present
-        trunc_files = glob.glob(nidaq_folder+"*_trunc*")
-        for i in trunc_files:
-            os.remove(i) 
 
-        trunc_files = glob.glob(video_folder+"*_trunc*")
-        for i in trunc_files:
-            os.remove(i) 
 
         nidaq_files = glob.glob(nidaq_folder+"*")
         video_files = glob.glob(video_folder+"*")

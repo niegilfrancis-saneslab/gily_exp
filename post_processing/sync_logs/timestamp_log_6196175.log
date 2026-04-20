@@ -1,0 +1,117 @@
+/mnt/home/njoseph/gily_exp/post_processing
+workergpu160
+Sun Apr  5 23:44:34 EDT 2026
+Setting up environment
+
+EnvironmentNameNotFound: Could not find conda environment: 528
+You can list all discoverable environments with `conda info --envs`.
+
+
+Running timestamp
+Running experiment: 528
+Exporting the h5 files to wav files
+0it [00:00, ?it/s]1it [00:12, 12.16s/it]1it [00:12, 12.17s/it]
+Automatically detected clock channel: 13
+Getting the rising and falling edges in the clock signal
+  0%|                                                                                          | 0/1 [00:00<?, ?it/s]100%|██████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  6.68it/s]100%|██████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  6.67it/s]
+Clock channel lengths
+[37500000]
+Automatically detecting start and stop record positions
+  0%|                                                                                          | 0/1 [00:00<?, ?it/s]100%|██████████████████████████████████████████████████████████████████████████████████| 1/1 [00:01<00:00,  1.02s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 1/1 [00:01<00:00,  1.04s/it]
+Start record detected in file index: 0
+Stop record detected in file index: 0
+Getting the moving average of the first and last clock signal
+  0%|                                                                                          | 0/2 [00:00<?, ?it/s] 50%|█████████████████████████████████████████                                         | 1/2 [00:01<00:01,  1.01s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.01s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.01s/it]
+Getting the index for start record
+0it [00:00, ?it/s]1486it [00:00, 324824.67it/s]
+Difference:  -1.6737100397001021
+Value:  -1.6731210270010388
+Set value of indices start
+Difference:  -1.8919966354773012
+Value:  -1.6728606166830442
+Set value of indices start
+Difference:  -1.447063803157724
+Value:  -1.6739388043297865
+Set value of indices start
+Getting the index for stop record
+0it [00:00, ?it/s]1486it [00:00, 368844.58it/s]
+The indices are: [   5307 2796954 2801120]
+The indices are: [2288624 5413602]
+Start record sample index: 5307
+Stop record sample index: 2288624
+Clock detection plot saved to: /mnt/home/neurostatslab/ceph/saneslab_data/big_setup/experiment_528/clock_start_stop_detection_exp_528.png
+  0%|                                                                                          | 0/7 [00:00<?, ?it/s][NULL @ 0x555558fbcf40] Invalid NAL unit size (112272 > 32368).
+[NULL @ 0x555558fbcf40] missing picture in access unit with size 32400
+[h264 @ 0x555559d10d40] Invalid NAL unit size (112272 > 32368).
+[h264 @ 0x555559d10d40] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558fbc800] stream 0, offset 0xd1eadd9: partial file
+[NULL @ 0x5555611f8580] Invalid NAL unit size (112513 > 65144).
+[NULL @ 0x5555611f8580] missing picture in access unit with size 65176
+[h264 @ 0x555559f7e880] Invalid NAL unit size (112513 > 65144).
+[h264 @ 0x555559f7e880] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f21d80] stream 0, offset 0xf6717f: partial file
+ 14%|███████████▋                                                                      | 1/7 [00:24<02:27, 24.50s/it][NULL @ 0x555558ccdc80] Invalid NAL unit size (108323 > 65128).
+[NULL @ 0x555558ccdc80] missing picture in access unit with size 65160
+[h264 @ 0x555558dd1700] Invalid NAL unit size (108323 > 65128).
+[h264 @ 0x555558dd1700] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558fb4f40] stream 0, offset 0xb2837cf: partial file
+[NULL @ 0x555558d82a00] Invalid NAL unit size (108551 > 97912).
+[NULL @ 0x555558d82a00] missing picture in access unit with size 97944
+[h264 @ 0x555558f89380] Invalid NAL unit size (108551 > 97912).
+[h264 @ 0x555558f89380] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558d87080] stream 0, offset 0xd61990: partial file
+ 29%|███████████████████████▍                                                          | 2/7 [00:47<01:57, 23.50s/it][NULL @ 0x555558d8dc00] Invalid NAL unit size (155266 > 65136).
+[NULL @ 0x555558d8dc00] missing picture in access unit with size 65168
+[h264 @ 0x555559022ec0] Invalid NAL unit size (155266 > 65136).
+[h264 @ 0x555559022ec0] Error splitting the input into NAL units.
+[NULL @ 0x555558f66280] Invalid NAL unit size (25063 > 21540).
+[NULL @ 0x555558f66280] missing picture in access unit with size 21544
+[h264 @ 0x5555591a6b80] Invalid NAL unit size (25063 > 21540).
+[h264 @ 0x5555591a6b80] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555559132740] stream 0, offset 0x1095a18: partial file
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555559132740] stream 0, offset 0x109b937: partial file
+ 43%|███████████████████████████████████▏                                              | 3/7 [01:12<01:36, 24.21s/it][NULL @ 0x5555611fc2c0] Invalid NAL unit size (121325 > 65128).
+[NULL @ 0x5555611fc2c0] missing picture in access unit with size 65160
+[h264 @ 0x555559b9f9c0] Invalid NAL unit size (121325 > 65128).
+[h264 @ 0x555559b9f9c0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555559132b00] stream 0, offset 0x9c5442a: partial file
+[NULL @ 0x555559138280] Invalid NAL unit size (18410 > 16624).
+[NULL @ 0x555559138280] missing picture in access unit with size 16628
+[h264 @ 0x55555906de80] Invalid NAL unit size (18410 > 16624).
+[h264 @ 0x55555906de80] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5555590df080] stream 0, offset 0xc57286: partial file
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5555590df080] stream 0, offset 0xc5b8f4: partial file
+ 57%|██████████████████████████████████████████████▊                                   | 4/7 [01:34<01:09, 23.22s/it][NULL @ 0x5555611fc600] Invalid NAL unit size (145064 > 65128).
+[NULL @ 0x5555611fc600] missing picture in access unit with size 65160
+[h264 @ 0x555558d38600] Invalid NAL unit size (145064 > 65128).
+[h264 @ 0x555558d38600] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f36740] stream 0, offset 0xceedb64: partial file
+[NULL @ 0x5555611fc2c0] Invalid NAL unit size (145119 > 65144).
+[NULL @ 0x5555611fc2c0] missing picture in access unit with size 65176
+[h264 @ 0x555558bddd80] Invalid NAL unit size (145119 > 65144).
+[h264 @ 0x555558bddd80] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f36280] stream 0, offset 0xdf3e02: partial file
+ 71%|██████████████████████████████████████████████████████████▌                       | 5/7 [01:59<00:47, 23.89s/it][NULL @ 0x555558c74000] Invalid NAL unit size (104390 > 65128).
+[NULL @ 0x555558c74000] missing picture in access unit with size 65160
+[h264 @ 0x555558e6bb80] Invalid NAL unit size (104390 > 65128).
+[h264 @ 0x555558e6bb80] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f1d640] stream 0, offset 0xc32fc75: partial file
+[NULL @ 0x55555912de00] Invalid NAL unit size (105005 > 65144).
+[NULL @ 0x55555912de00] missing picture in access unit with size 65176
+[h264 @ 0x555558f3cd00] Invalid NAL unit size (105005 > 65144).
+[h264 @ 0x555558f3cd00] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f66d00] stream 0, offset 0xbf5674: partial file
+ 86%|██████████████████████████████████████████████████████████████████████▎           | 6/7 [02:24<00:24, 24.34s/it][NULL @ 0x555559d6bdc0] Invalid NAL unit size (141702 > 65128).
+[NULL @ 0x555559d6bdc0] missing picture in access unit with size 65160
+[h264 @ 0x555558ee3ac0] Invalid NAL unit size (141702 > 65128).
+[h264 @ 0x555558ee3ac0] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x555558f36500] stream 0, offset 0xd61132c: partial file
+[NULL @ 0x555559d6bdc0] Invalid NAL unit size (141619 > 32376).
+[NULL @ 0x555559d6bdc0] missing picture in access unit with size 32408
+[h264 @ 0x555558db9780] Invalid NAL unit size (141619 > 32376).
+[h264 @ 0x555558db9780] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55555912de00] stream 0, offset 0xd9f42b: partial file
+100%|██████████████████████████████████████████████████████████████████████████████████| 7/7 [02:49<00:00, 24.47s/it]100%|██████████████████████████████████████████████████████████████████████████████████| 7/7 [02:49<00:00, 24.16s/it]
+Clock channel index :0 has 549 number of rising edges
+Video data is longer by 8092 frames
+Sun Apr  5 23:48:00 EDT 2026
